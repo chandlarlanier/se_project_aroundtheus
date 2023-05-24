@@ -14,3 +14,7 @@ This project simulates a simplified social media platform and includes features 
 * Post Interactions: Add features such as liking, sharing, or bookmarking posts. This would increase user engagement and provide more ways for users to interact with the content.
 * Authentication and User Management: Implement authentication functionality to allow users to sign up, log in, and manage their profiles. This would enhance the project by providing a more interactive and personalized experience for users.
 * Search Functionality: Add a search feature that allows users to search for specific posts or users based on keywords or tags. This can enhance the usability of the project and make it easier for users to find relevant content.
+
+## How to View
+
+View on GitHub Pages at [this link](https://chandlarlanier.github.io/se_project_aroundtheus/).
