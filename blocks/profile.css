@@ -1,0 +1,118 @@
+.profile {
+  display: flex;
+  align-items: center;
+  padding-top: 4vh;
+  padding-bottom: 2vh;
+}
+
+.profile__image {
+  height: 15%;
+  width: 15%;
+  border-radius: 50%;
+  object-fit: cover;
+  background-position: center;
+  margin-right: 2vw;
+}
+
+.profile__info {
+  display: grid;
+  grid-template-areas:
+    "title button"
+    "description description";
+  grid-template-columns: auto auto;
+  align-items: center;
+  grid-gap: 20px 17px;
+}
+
+.profile__title {
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 1.14;
+  grid-area: title;
+  margin: 0;
+}
+
+.profile__edit-button {
+  background: transparent url('../images/edit-icon.svg') center no-repeat;
+  height: 24px;
+  width: 24px;
+  grid-area: button;
+  border: 1px solid white;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.profile__description {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2;
+  grid-area: description;
+  margin: 0;
+}
+
+.profile__add-button {
+  background: transparent url('../images/add-icon.svg') center no-repeat;
+  height: 50px;
+  width: 150px;
+  margin-left: auto;
+  border: 1.5px solid white;
+  border-radius: 2px;
+}
+
+.profile__add-button:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+  .profile__title {
+    font-size: 30px;
+  }
+
+  .profile__add-button {
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 675px) {
+  .profile {
+    flex-direction: column;
+  }
+
+  .profile__image {
+    height: 35%;
+    width: 35%;
+    margin: 0 0 4vh 0;
+  }
+
+  .profile__info {
+    justify-items: center;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-areas:
+    ". title button"
+    ". description .";
+    margin-bottom: 5%;
+  }
+
+  .profile__title {
+    font-size: 25px;
+    grid-area: title;
+  }
+
+  .profile__edit-button {
+    grid-area: button;
+  }
+
+  .profile__description {
+    grid-area: description;
+  }
+
+  .profile__add-button {
+    max-width: 550px;
+    width: 282px;
+    margin: auto;
+  }
+}

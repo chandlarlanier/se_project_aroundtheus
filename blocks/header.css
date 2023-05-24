@@ -1,0 +1,21 @@
+.header {
+  padding-top: 6vh;
+  padding-bottom: 4vh;
+  border-bottom: 1px solid #545454;
+}
+
+.header__logo {
+
+}
+
+@media screen and (max-width: 675px) {
+  .header{
+    width: 100%;
+  }
+
+  .header__logo {
+    position: relative;
+    top: 3%;
+    left: 10%;
+  }
+}
