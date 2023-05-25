@@ -1,17 +1,17 @@
 .profile {
   display: flex;
   align-items: center;
-  padding-top: 4vh;
-  padding-bottom: 4vh;
+  padding-top: 36px;
+  padding-bottom: 47px;
 }
 
 .profile__image {
-  height: 15%;
-  width: 15%;
+  height: 125px;
+  width: 125px;
   border-radius: 50%;
-  object-fit: contain;
+  object-fit: fill;
   background-position: center;
-  margin-right: 2vw;
+  margin-right: 25px;
 }
 
 .profile__info {
@@ -21,7 +21,7 @@
     "description description";
   grid-template-columns: auto auto;
   align-items: center;
-  grid-gap: 20px 17px;
+  grid-gap: 7px 18px;
 }
 
 .profile__title {
@@ -36,11 +36,13 @@
 }
 
 .profile__edit-button {
+  box-sizing: border-box;
   background: transparent url('../images/edit-icon.svg') center no-repeat;
   height: 24px;
   width: 24px;
   grid-area: button;
   border: 1px solid white;
+  padding: 7px;
 }
 
 .profile__edit-button:hover {
@@ -60,9 +62,11 @@
 }
 
 .profile__add-button {
+  box-sizing: content-box;
   background: transparent url('../images/add-icon.svg') center no-repeat;
   height: 50px;
   width: 150px;
+  padding: 0;
   margin-left: auto;
   border: 2px solid white;
   border-radius: 2px;
@@ -75,24 +79,49 @@
 
 @media screen and (max-width: 1000px) {
   .profile__title {
-    font-size: 30px;
+    font-size: 27px;
   }
 
   .profile__add-button {
-    width: 120px;
+    width: 110px;
   }
 }
 
+
 @media screen and (max-width: 675px) {
   .profile {
+    padding: 40px 0;
     flex-direction: column;
-    padding: 4.5vh 0;
   }
 
   .profile__image {
-    height: 15vh;
-    width: 15vh;
-    margin: 0 0 4vh 0;
+    margin: 0 0 5% 0;
+  }
+
+  .profile__info {
+    justify-items: center;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-areas:
+    ". title button"
+    ". description .";
+    grid-gap: 14px 10px;
+  }
+
+  .profile__add-button {
+    margin: 8% auto 2%;
+    height: 50px;
+    width: 282px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .profile {
+    flex-direction: column;
+    padding: 12% 0 11%;
+  }
+
+  .profile__image {
+    margin: 0 0 8% 0;
   }
 
   .profile__info {
@@ -121,7 +150,7 @@
   }
 
   .profile__add-button {
-    max-width: 550px;
+    height: 50px;
     width: 282px;
     margin: 11% auto 0;
   }
