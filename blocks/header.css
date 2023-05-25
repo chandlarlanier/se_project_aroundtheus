@@ -1,17 +1,17 @@
 .header {
   padding-top: 6vh;
   padding-bottom: 4vh;
-  border-bottom: 1px solid #545454;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
 @media screen and (max-width: 675px) {
   .header{
     width: 100%;
+    padding: 3.5vh 3vh;
   }
 
   .header__logo {
-    position: relative;
-    top: 3%;
-    left: 10%;
+    height: 3vh;
+    width: 15vh;
   }
 }

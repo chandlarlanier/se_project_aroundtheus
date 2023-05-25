@@ -1,17 +1,22 @@
 .footer {
-  padding-top: 4vh;
-  padding-bottom: 3vh;
+  padding-top: 8vh;
+  padding-bottom: 7vh;
 }
 
 .footer__copyright {
   font-size: 18px;
   font-weight: 400;
+  margin: 0;
   line-height: 1.2;
   color: #545454;
 }
 
 @media screen and (max-width: 675px) {
+  .footer {
+    padding-top: 6vh;
+    padding-bottom: 4.5vh;
+  }
   .footer__copyright {
-    margin-left: 10%;
+    margin-left: 6%;
   }
 }
