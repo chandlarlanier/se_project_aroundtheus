@@ -1,0 +1,127 @@
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0 19px;
+}
+
+.modal_opened {
+  display: flex;
+}
+
+.modal__container {
+  background-color: #fff;
+  margin: auto;
+  padding: 36px;
+  border-radius: 10px;
+  position: relative;
+  width: 430px;
+}
+
+.modal__close-button {
+  position: absolute;
+  top: -45px;
+  right: -45px;
+  width: 40px;
+  height: 40px;
+  background-image: url('../images/close-icon.svg');
+  border: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  padding: 0;
+}
+
+.modal__close-button:hover {
+  opacity: 0.6;
+}
+
+.modal__heading {
+  color: #000;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 0 0 41px;
+}
+
+.modal__title-input {
+  display: block;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 13px 0;
+  width: 100%;
+}
+
+.modal__title-input::placeholder {
+  color: #000;
+  font-size: 14px;
+  font-weight: 400px;
+  line-height: 1.2;
+}
+
+.modal__description-input {
+  display: block;
+  border: none;
+  margin-top: 17px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 13px 0;
+  width: 100%;
+}
+
+.modal__description-input::placeholder {
+  color: #000;
+  font-size: 14px;
+  font-weight: 400px;
+  line-height: 1.2;
+}
+
+.modal__save-button {
+  background-color: #000;
+  color: #fff;
+  border-radius: 2px;
+  text-align: center;
+  margin: 48px auto 0;
+  height: 50px;
+  width: 100%;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.modal__save-button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 675px) {
+  .modal__container {
+    box-sizing: border-box;
+    width: 282px;
+    padding: 25px 22px;
+  }
+
+  .modal__close-button {
+    bottom: -14px;
+    right: 0;
+    height: 26px;
+    width: 26px;
+  }
+
+  .modal__heading {
+    font-size: 18px;
+    margin-bottom: 62px;
+  }
+
+  .modal__save-button {
+    margin-top: 45px;
+    height: 48px;
+  }
+}

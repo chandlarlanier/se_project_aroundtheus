@@ -136,6 +136,7 @@
   }
 
   .profile__add-button {
+    box-sizing: border-box;
     margin: 8% auto 2%;
     height: 50px;
     width: 282px;
