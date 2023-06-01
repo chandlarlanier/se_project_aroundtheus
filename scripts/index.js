@@ -44,6 +44,9 @@ const addCardForm = addCardModal.querySelector(".modal__form");
 const cardTitleInput = addCardModal.querySelector(".modal__input_type_title");
 const cardImageInput = addCardModal.querySelector(".modal__input_type_url");
 
+const previewImageModal = document.querySelector(".preview-image-modal");
+
+
 const cardList = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector("#card-template").content.querySelector(".card");
 
@@ -60,13 +63,26 @@ function getCardElement(cardData) {
   const cardTitle = cardElement.querySelector(".card__description");
   const likeButton = cardElement.querySelector(".card__like-button");
   const deleteButton = cardElement.querySelector(".card__delete-button");
+  const previewImageCloseButton = previewImageModal.querySelector(".preview-image-modal__close-button");
+  const previewImage = previewImageModal.querySelector(".preview-image-modal__image");
+  const previewImageText = previewImageModal.querySelector(".preview-image-modal__text");
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
   });
-
   deleteButton.addEventListener("click", () => {
     cardElement.remove();
   });
+
+  cardImage.addEventListener("click", () => {
+    previewImage.setAttribute("src", cardData.link);
+    previewImage.setAttribute("alt", cardData.name);
+    previewImageText.textContent = cardTitle.textContent;
+    previewImageModal.classList.add("preview-image-modal_opened");
+  });
+
+  previewImageCloseButton.addEventListener("click", () => {
+    previewImageModal.classList.remove("preview-image-modal_opened");
+  })
   cardImage.setAttribute("src", cardData.link);
   cardImage.setAttribute("alt", cardData.name);
   cardTitle.textContent = cardData.name;
