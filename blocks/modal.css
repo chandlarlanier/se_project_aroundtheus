@@ -1,5 +1,8 @@
 .modal {
-  display: none;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.6s, opacity 0.6s;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -11,10 +14,12 @@
 }
 
 .modal_opened {
-  display: flex;
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.6s;
 }
 
-.modal__container {
+.modal__container_type_edit-profile, .modal__container_type_add-card {
   background-color: #fff;
   margin: auto;
   padding: 36px;
@@ -23,7 +28,15 @@
   width: 430px;
 }
 
-.modal__close-button {
+.modal__container_type_preview-image {
+  margin: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.modal__close-button_type_edit-profile, .modal__close-button_type_add-card {
   position: absolute;
   top: -45px;
   right: -45px;
@@ -38,23 +51,46 @@
   padding: 0;
 }
 
+.modal__close-button_type_preview-image {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  left: calc(100% + 7px);
+  bottom: 7px;
+  background-image: url('../images/close-icon.svg');
+  border: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  padding: 0;
+}
+
 .modal__close-button:hover {
   opacity: 0.6;
 }
 
-.modal__heading {
+.modal__heading_type_edit-profile, .modal__heading_type_add-card {
   color: #000;
   font-size: 24px;
   font-weight: 900;
   line-height: 1.2;
-  margin: 0 0 41px;
+  margin: 0 0 24px;
+}
+
+.modal__heading_type_preview-image {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 10px 0 0 0;
 }
 
 .modal__input {
   display: block;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 13px 0;
+  padding: 30px 0 13px;
   width: 100%;
 }
 
@@ -85,21 +121,28 @@
   opacity: 0.8;
 }
 
+.modal__image {
+  margin: auto;
+  max-height: 75vh;
+  max-width: 75vw;
+}
+
+
 @media screen and (max-width: 675px) {
-  .modal__container {
+  .modal__container_type_edit-profile, .modal__container_type_add-card {
     box-sizing: border-box;
     width: 282px;
     padding: 25px 22px;
   }
 
-  .modal__close-button {
+  .modal__close-button_type_edit-profile, .modal__close-button_type_add-card {
     bottom: -14px;
     right: 0;
     height: 26px;
     width: 26px;
   }
 
-  .modal__heading {
+  .modal__heading_type_edit-profile, .modal__heading_type_add-card {
     font-size: 18px;
     margin-bottom: 62px;
   }
@@ -107,5 +150,16 @@
   .modal__save-button {
     margin-top: 45px;
     height: 48px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .modal__close-button_type_edit-profile, .modal__close-button_type_add-card {
+    height: 26px;
+    width: 26px;
+  }
+  .modal__close-button_type_preview-image {
+    height: 30px;
+    width: 30px;
   }
 }
