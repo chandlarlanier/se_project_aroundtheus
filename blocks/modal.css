@@ -50,7 +50,7 @@
   margin: 0 0 41px;
 }
 
-.modal__title-input {
+.modal__input {
   display: block;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -58,23 +58,7 @@
   width: 100%;
 }
 
-.modal__title-input::placeholder {
-  color: #000;
-  font-size: 14px;
-  font-weight: 400px;
-  line-height: 1.2;
-}
-
-.modal__description-input {
-  display: block;
-  border: none;
-  margin-top: 17px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 13px 0;
-  width: 100%;
-}
-
-.modal__description-input::placeholder {
+.modal__input::placeholder {
   color: #000;
   font-size: 14px;
   font-weight: 400px;

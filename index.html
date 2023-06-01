@@ -17,7 +17,7 @@
           <img src="./images/profile-image.png" alt="Avatar" class="profile__image"/>
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
-            <button class="profile__edit-button" id="profile-edit-button" type="button" aria-label="Edit info"></button>
+            <button class="profile__edit-button" type="button" aria-label="Edit info"></button>
             <p class="profile__description">Explorer</p>
           </div>
           <button class="profile__add-button" type="button" aria-label="Add post"></button>
@@ -30,18 +30,35 @@
         <p class="footer__copyright">&copy; 2023 Around the U.S.</p>
       </footer>
     </div>
-    <div class="modal" id="profile-edit-modal">
+
+
+    <!-- Edit Modal -->
+    <div class="modal modal_type_edit-profile">
       <div class="modal__container">
-        <button class="modal__close-button" id="profile-edit-close-button"></button>
+        <button class="modal__close-button"></button>
         <p class="modal__heading">Edit profile</p>
         <form class="modal__form">
-          <input type="text" name="title" id="profile-title-input" placeholder="Name" class="modal__title-input">
-          <input type="text" name="description" id="profile-description-input" placeholder="Description" class="modal__description-input">
-          <button class="modal__save-button" id="profile-edit-save-button">Save</button>
+          <input type="text" name="title" placeholder="Name" class="modal__input modal__input_type_name">
+          <input type="text" name="description" placeholder="Description" class="modal__input modal__input_type_description">
+          <button class="modal__save-button">Save</button>
         </form>
       </div>
     </div>
 
+    <!-- Add Card Modal -->
+    <div class="modal modal_type_add-card">
+      <div class="modal__container">
+        <button class="modal__close-button"></button>
+        <p class="modal__heading">New place</p>
+        <form class="modal__form">
+          <input type="text" name="title" placeholder="Title" class="modal__input modal__input_type_title">
+          <input type="text" name="url" placeholder="Image link" class="modal__input modal__input_type_url">
+          <button class="modal__save-button">Create</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Card Template -->
     <template id="card-template">
       <li class="card">
         <img src="" alt="" class="card__image">

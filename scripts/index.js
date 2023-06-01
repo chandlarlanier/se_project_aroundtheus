@@ -26,23 +26,28 @@ const initialCards = [
 ];
 
 // Elements
-const profileEditButton = document.querySelector("#profile-edit-button");
-const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileEditCloseButton = profileEditModal.querySelector("#profile-edit-close-button");
+const profileEditButton = document.querySelector(".profile__edit-button");
+const profileEditModal = document.querySelector(".modal_type_edit-profile");
+const profileEditCloseButton = profileEditModal.querySelector(".modal__close-button");
 const profileEditForm = profileEditModal.querySelector(".modal__form");
-const profileTitle = document.querySelector(".profile__title");
+const profileName = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
-const profileTitleInput = document.querySelector("#profile-title-input");
-const profileDescriptionInput = document.querySelector("#profile-description-input");
-const cardListEl = document.querySelector(".cards__list")
-const cardTemplate = document.querySelector("#card-template").content.firstElementChild;
+const profileNameInput = profileEditModal.querySelector(".modal__input_type_name");
+const profileDescriptionInput = profileEditModal.querySelector(".modal__input_type_description");
+
+const addCardButton = document.querySelector(".profile__add-button");
+const addCardModal = document.querySelector(".modal_type_add-card");
+const addCardCloseButton = addCardModal.querySelector(".modal__close-button");
+const addCardForm = addCardModal.querySelector(".modal__form");
+const addCardTitleInput = addCardModal.querySelector(".modal__input_type_title");
+const addCardImageInput = addCardModal.querySelector(".modal__input_type_url");
+
+const cardList = document.querySelector(".cards__list");
+const cardTemplate = document.querySelector("#card-template").content.querySelector(".card");
+
 
 
 // Functions
-function closePopUp() {
-  profileEditModal.classList.remove("modal_opened");
-}
-
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
@@ -53,25 +58,48 @@ function getCardElement(cardData) {
   return cardElement;
 }
 
+initialCards.forEach((cardData) => {
+  const cardElement = getCardElement(cardData);
+  cardList.prepend(cardElement);
+});
+
+
 // Event Handlers
 function handleProfileEditSubmit(e) {
   e.preventDefault();
-  profileTitle.textContent = profileTitleInput.value;
+  profileName.textContent = profileNameInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closePopUp();
+  profileEditModal.classList.remove("modal_opened");
 }
+
+
+// function handleAddCardSubmit(e) {
+//   e.preventDefault();
+//   const cardElement = cardTemplate.cloneNode(true);
+//   const cardImageEl = cardElement.querySelector(".card__image");
+//   const cardTitleEl = cardElement.querySelector(".card__description");
+//   cardImageEl.setAttribute("src", addCardImageInput.value);
+//   cardImageEl.setAttribute("alt", addCardTitleInput.value);
+//   cardTitleEl.textContent = addCardImageInput.value;
+//   cardListEl.appendChild(cardElement);
+// }
 
 // Event Listeners
 profileEditButton.addEventListener("click", function () {
-  profileTitleInput.value = profileTitle.textContent;
+  profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
   profileEditModal.classList.add("modal_opened");
 });
-
-profileEditCloseButton.addEventListener("click", closePopUp);
+profileEditCloseButton.addEventListener("click", function () {
+  profileEditModal.classList.remove("modal_opened");
+});
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
-initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
+
+
+addCardButton.addEventListener("click", function () {
+  addCardModal.classList.add("modal_opened");
+});
+addCardCloseButton.addEventListener("click", function () {
+  addCardModal.classList.remove("modal_opened");
 });
