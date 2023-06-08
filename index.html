@@ -37,14 +37,18 @@
         <button class="popup__close-button popup__close-button_type_edit-profile"></button>
         <h3 class="popup__heading popup__heading_type_edit-profile">Edit profile</h3>
         <form class="popup__form" name="popup__form_type_edit-profile">
-          <input type="text" name="title" placeholder="Name" class="popup__input popup__input_type_name" minlength="2" maxlength="40" required>
-          <input type="text" name="description" placeholder="Description" class="popup__input popup__input_type_description" minlength="2" maxlength="200" required>
+          <label for="name" class="popup__label">
+            <input type="text" name="name" placeholder="Name" class="popup__input popup__input_type_name" minlength="2" maxlength="40" required>
+            <span class="popup__error">Error message here</span>
+          </label>
+          <label for="description" class="popup__label">
+            <input type="text" name="description" placeholder="Description" class="popup__input popup__input_type_description" minlength="2" maxlength="200" required>
+            <span class="popup__error">Error message here</span>
+          </label>
           <button class="popup__save-button">Save</button>
         </form>
       </div>
     </div>
-
-    <span class="popup__error">Error message here</span>
 
     <!-- Add Card Popup -->
     <div class="popup popup_type_add-card">
@@ -52,8 +56,14 @@
         <button class="popup__close-button popup__close-button_type_add-card"></button>
         <h3 class="popup__heading popup__heading_type_add-card">New place</h3>
         <form class="popup__form" name="popup__form_type_add-card">
-          <input type="text" name="title" placeholder="Title" class="popup__input popup__input_type_title">
-          <input type="text" name="url" placeholder="Image link" class="popup__input popup__input_type_url">
+          <label for="title" class="popup__label">
+            <input type="text" name="title" placeholder="Title" class="popup__input popup__input_type_title">
+            <span class="popup__error">Error message here</span>
+          </label>
+          <label for="url" class="popup__label">
+            <input type="text" name="url" placeholder="Image link" class="popup__input popup__input_type_url">
+            <span class="popup__error"></span>
+          </label>
           <button class="popup__save-button">Create</button>
         </form>
       </div>

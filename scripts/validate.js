@@ -1,12 +1,24 @@
 // enabling validation by calling enableValidation()
 // pass all the settings on call
 
+function showInputError(formEl, inputEl, options) {
+  const errorMessageEl = document.querySelector(".popup__error");
+}
+
+function checkInputValidity(formEl, inputEl, options) {
+  if (!inputEl.validity.valid) {
+    showInputError(formEl, inputEl, options);
+  } else {
+    hideInputError(formEl, inputEl, options);
+  }
+}
+
 function setEventListeners(formEl, options) {
   const { inputSelector } = options;
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
-  inputEls.forEach(inputEl => {
+  inputEls.forEach((inputEl) => {
     inputEl.addEventListener("change", (e) => {
-      console.log(inputEl.validationMessage);
+      checkInputValidity(formEl, inputEl, options);
     });
   });
 }
