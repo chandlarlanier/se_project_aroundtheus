@@ -49,9 +49,9 @@ const previewImage = previewImagePopup.querySelector(".popup__image");
 const previewImageHeading = previewImagePopup.querySelector(".popup__heading");
 
 const closeButtons = document.querySelectorAll(".popup__close-button");
+
 const cardList = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector("#card-template").content.querySelector(".card");
-
 
 // Functions
 function getCardElement(cardData) {
@@ -81,18 +81,21 @@ function getCardElement(cardData) {
   return cardElement;
 }
 
-// Event Handlers
+function clickOutPopup(e) {
+  if (e.target.classList.contains("popup")) {
+    closePopup(document.querySelector(".popup_opened"));
+  }
+}
 
-
-function handleProfileEditSubmit(evt) {
-  evt.preventDefault();
+function handleProfileEditSubmit(e) {
+  e.preventDefault();
   profileName.textContent = profileNameInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closePopup(profileEditPopup);
 }
 
-function handleAddCardSubmit(evt) {
-  evt.preventDefault();
+function handleAddCardSubmit(e) {
+  e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardImageInput.value;
   renderCard({name, link}, cardList);
@@ -107,6 +110,18 @@ function openPopup(popup) {
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  popupInputs = popup.querySelectorAll(".popup__input");
+  popupInputs.forEach((input) => {
+    input.classList.remove("popup__input_type_error");
+  });
+  popupErrors = popup.querySelectorAll(".popup__error");
+  popupErrors.forEach((error) => {
+    error.classList.remove("popup__error_visible");
+  });
+  if (popup.classList.contains("popup_type_add-card")) {
+    cardTitleInput.value = "";
+    cardImageInput.value = "";
+  }
 }
 
 function renderCard(cardData, wrapper) {
@@ -117,7 +132,6 @@ function renderCard(cardData, wrapper) {
 // Form Listeners
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addCardForm.addEventListener("submit", handleAddCardSubmit);
-
 
 // Other Event Listeners
 profileEditButton.addEventListener("click", () => {
@@ -131,6 +145,17 @@ closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 });
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closePopup(document.querySelector(".popup_opened"));
+  }
+});
+
+profileEditPopup.addEventListener("click", clickOutPopup);
+addCardPopup.addEventListener("click", clickOutPopup);
+previewImagePopup.addEventListener("click", clickOutPopup);
+
 
 
 // Add Initial Cards
