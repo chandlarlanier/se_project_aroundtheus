@@ -50,13 +50,22 @@ function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
 function setEventListeners(formElement, {inputSelector, submitButtonSelector, inactiveButtonClass, ...rest}) {
   const inputList = [...formElement.querySelectorAll(inputSelector)];
   const buttonElement = formElement.querySelector(submitButtonSelector);
+
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
       checkInputValidity(formElement, inputElement, rest);
       toggleButtonState(inputList, buttonElement, inactiveButtonClass);
     });
   });
+
+  formElement.addEventListener("reset", () => {
+    setTimeout(() => {
+      toggleButtonState(inputList, buttonElement, inactiveButtonClass);
+    }, 0);
+  });
 }
+
+
 
 function enableValidation({formSelector, ...rest}) {
   const formList = [...document.querySelectorAll(formSelector)];
