@@ -1,6 +1,6 @@
 # Around The U.S.
 
-This project simulates a simplified social media platform and includes features such as user profiles and posts. Its main objective is to provide hands on experience in responsive design principles, utilizing grid display, the usage of HTML and CSS for creating interactive elements, and the process of importing files to enhance the aesthetics of a web page.
+This project simulates a simplified social media platform that allows users to share their travel experiences. Its main objective is to provide hands on experience in responsive design principles, using HTML and CSS for creating interactive elements, as well as form validation using JavaScript.
 
 
 ## Features
@@ -8,9 +8,9 @@ This project simulates a simplified social media platform and includes features 
 
 * Responsive Design: The webpage is designed with responsiveness in mind, utilizing grid display and media queries to ensure it adapts and displays appropriately on different devices and screen sizes. This allows users to have a consistent and user-friendly experience, whether they access the app on a desktop, tablet, or mobile device.
 
-* Interactive Elements: The project incorporates CSS hover effects on buttons and other interactive elements, providing a visually pleasing and engaging user experience.
-
 * Form Validation: The forms in the project incorporate validation mechanisms using JavaScript to ensure that the input provided by users is accurate and meets the required criteria. This includes verifying the correct number of characters and validating the format of input (i.e. URLs).
+
+* Interactive Elements: The project incorporates CSS hover effects on buttons and other interactive elements, providing a visually pleasing and engaging user experience.
 
 * Smooth Transitions: The project utilizes transitions to create smooth opening and closing effects for the popup forms. This enhances the overall user experience and adds a touch of interactivity to the platform.
 
