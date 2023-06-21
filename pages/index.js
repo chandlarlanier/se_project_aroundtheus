@@ -67,7 +67,7 @@ const getCardElement = (data) => {
   const likeButton = cardElement.querySelector(".card__like-button");
   const deleteButton = cardElement.querySelector(".card__delete-button");
 
-  cardImage.style.backgroundImage = `url(${data.link})`;
+  cardImage.setAttribute("src", `${data.link}`);
   cardElement.querySelector(".card__description").textContent = data.name;
 
   likeButton.addEventListener("click", handleLikeIcon);

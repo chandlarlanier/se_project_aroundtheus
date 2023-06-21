@@ -13,13 +13,6 @@ const closePopupWindow = (popupWindow) => {
   document.removeEventListener("keyup", handleEscUp);
 }
 
-// need to delete handleEscUp and figure out how to add new event listener to document for ESC
-
-// const handleEscUp = (evt) => {
-//   evt.preventDefault();
-//   isEscEvent(evt, closePopupWindow);
-// }
-
 const isEscEvent = (evt, action) => {
   const activePopup = document
     .querySelector(".popup_opened");
@@ -73,7 +66,7 @@ class Card {
     this._cardElement = this._getTemplate();
     this._setEventListeners();
 
-    this._cardElement.querySelector(".card__image").src = `url(${this._link})`;
+    this._cardElement.querySelector(".card__image").setAttribute("src", `${this._link}`);
     this._cardElement.querySelector(".card__description").textContent = this._name;
 
     return this._cardElement;
