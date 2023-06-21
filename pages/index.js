@@ -120,7 +120,7 @@ const handleEscUp = (evt) => {
   isEscEvent(evt, closePopupWindow);
 };
 
-const formSubmitHandler = (evt) => {
+const editFormSubmitHandler = (evt) => {
   evt.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
@@ -139,7 +139,7 @@ const cardFormSubmitHandler = (evt) => {
 
 
 // Event Listeners
-profileEditPopup.addEventListener("submit", formSubmitHandler);
+profileEditPopup.addEventListener("submit", editFormSubmitHandler);
 addCardPopup.addEventListener("submit", cardFormSubmitHandler);
 
 openEditFormButton.addEventListener("click", () => {
