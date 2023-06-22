@@ -3,10 +3,10 @@ const imageElement = imagePopupWindow.querySelector(".popup__image");
 const imageCaption = imagePopupWindow.querySelector(".popup__heading_type_preview-image");
 const ESC_KEYCODE = 27;
 
-// const openPopupWindow = (popupWindow) => {
-//   popupWindow.classList.add("popup_opened");
-//   document.addEventListener("keyup", handleEscUp);
-// };
+const openPopupWindow = (popupWindow) => {
+  popupWindow.classList.add("popup_opened");
+  document.addEventListener("keyup", handleEscUp);
+};
 
 const closePopupWindow = () => {
   imagePopupWindow.classList.remove("popup_opened");
@@ -55,17 +55,17 @@ class Card {
   };
 
   _handlePreviewImage() {
-    imageElement.src = data.link;
-    imageElement.alt = data.name;
-    imageCaption.textContent = data.name;
-    imagePopupWindow.classList.add("popup_opened");
+    imageElement.src = this._link;
+    imageElement.alt = this._name;
+    imageCaption.textContent = this._name;
+    openPopupWindow(imagePopupWindow);
   };
 
   _setEventListeners() {
     this._cardElement.querySelector(".card__like-button").addEventListener("click", () => this._handleLikeIcon());
     this._cardElement.querySelector(".card__delete-button").addEventListener("click", () => this._handleDeleteCard());
     this._cardElement.querySelector(".card__image").addEventListener("click", () => this._handlePreviewImage());
-  };
+  }
 
   generateCard() {
     this._cardElement = this._getTemplate();
