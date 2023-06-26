@@ -24,4 +24,10 @@ const isEscEvent = (evt, action) => {
   }
 };
 
-export {ESC_KEYCODE, openPopupWindow, closePopupWindow, handleEscUp, isEscEvent};
+const closePopupOnRemoteClick = (evt) => {
+  if (evt.target === evt.currentTarget || evt.target.classList.contains("popup__close-button")) {
+    closePopupWindow();
+  }
+};
+
+export {ESC_KEYCODE, openPopupWindow, closePopupWindow, handleEscUp, isEscEvent, closePopupOnRemoteClick};

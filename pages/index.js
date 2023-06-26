@@ -1,6 +1,6 @@
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
-import { ESC_KEYCODE, openPopupWindow, closePopupWindow, isEscEvent, handleEscUp } from "../utils/utils.js";
+import { ESC_KEYCODE, openPopupWindow, closePopupWindow, isEscEvent, handleEscUp, closePopupOnRemoteClick } from "../utils/utils.js";
 import initialCards from "../components/constants.js";
 
 
@@ -53,8 +53,7 @@ const handleCardFormSubmit = (evt) => {
     cardList);
   closePopupWindow();
   addCardForm.reset();
-  addCardForm.querySelector(".popup__button").classList.add(validationSettings.inactiveButtonClass);
-  addCardForm.querySelector(".popup__button").disabled = true;
+  addFormValidator._toggleButtonState();
 };
 
 
@@ -72,23 +71,11 @@ openCardFormButton.addEventListener("click", () => {
   openPopupWindow(addCardPopup);
 });
 
-profileEditPopup.addEventListener("click", (evt) => {
-  if (evt.target.classList.contains("popup") || evt.target.classList.contains("popup__close-button")) {
-    closePopupWindow(profileEditPopup);
-  }
-});
+profileEditPopup.addEventListener("mousedown", closePopupOnRemoteClick);
 
-addCardPopup.addEventListener("click", (evt) => {
-  if (evt.target.classList.contains("popup") || evt.target.classList.contains("popup__close-button")) {
-    closePopupWindow();
-  }
-});
+addCardPopup.addEventListener("click", closePopupOnRemoteClick);
 
-previewImagePopup.addEventListener("click", (evt) => {
-  if (evt.target.classList.contains("popup") || evt.target.classList.contains("popup__close-button")) {
-    closePopupWindow();
-  }
-});
+previewImagePopup.addEventListener("click", closePopupOnRemoteClick);
 
 
 // Add Initial Cards
