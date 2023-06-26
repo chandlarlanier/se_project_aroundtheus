@@ -12,8 +12,10 @@ const closePopupWindow = () => {
 };
 
 const handleEscUp = (evt) => {
-  evt.preventDefault();
-  isEscEvent(evt, closePopupWindow);
+  if (evt.which === ESC_KEYCODE) {
+    evt.preventDefault();
+    closePopupWindow();
+  }
 };
 
 const isEscEvent = (evt, action) => {

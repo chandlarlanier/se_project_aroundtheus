@@ -1,6 +1,6 @@
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
-import { ESC_KEYCODE, openPopupWindow, closePopupWindow, isEscEvent, handleEscUp, closePopupOnRemoteClick } from "../utils/utils.js";
+import { ESC_KEYCODE, openPopupWindow, closePopupWindow, handleEscUp, closePopupOnRemoteClick } from "../utils/utils.js";
 import initialCards from "../components/constants.js";
 
 
@@ -61,21 +61,21 @@ const handleCardFormSubmit = (evt) => {
 profileEditPopup.addEventListener("submit", handleEditFormSubmit);
 addCardPopup.addEventListener("submit", handleCardFormSubmit);
 
-openEditFormButton.addEventListener("click", () => {
+openEditFormButton.addEventListener("mousedown", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
   openPopupWindow(profileEditPopup);
 });
 
-openCardFormButton.addEventListener("click", () => {
+openCardFormButton.addEventListener("mousedown", () => {
   openPopupWindow(addCardPopup);
 });
 
 profileEditPopup.addEventListener("mousedown", closePopupOnRemoteClick);
 
-addCardPopup.addEventListener("click", closePopupOnRemoteClick);
+addCardPopup.addEventListener("mousedown", closePopupOnRemoteClick);
 
-previewImagePopup.addEventListener("click", closePopupOnRemoteClick);
+previewImagePopup.addEventListener("mousedown", closePopupOnRemoteClick);
 
 
 // Add Initial Cards
