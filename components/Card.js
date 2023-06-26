@@ -1,30 +1,9 @@
+import { ESC_KEYCODE, openPopupWindow, closePopupWindow, isEscEvent, handleEscUp } from "../utils/utils.js";
+
+
 const imagePopupWindow = document.querySelector(".popup_type_preview-image");
 const imageElement = imagePopupWindow.querySelector(".popup__image");
 const imageCaption = imagePopupWindow.querySelector(".popup__heading_type_preview-image");
-const ESC_KEYCODE = 27;
-
-const openPopupWindow = (popupWindow) => {
-  popupWindow.classList.add("popup_opened");
-  document.addEventListener("keyup", handleEscUp);
-};
-
-const closePopupWindow = () => {
-  imagePopupWindow.classList.remove("popup_opened");
-  document.removeEventListener("keyup", handleEscUp);
-};
-
-const handleEscUp = (evt) => {
-  evt.preventDefault();
-  isEscEvent(evt, closePopupWindow);
-};
-
-const isEscEvent = (evt, action) => {
-  const activePopup = document
-    .querySelector(".popup_opened");
-  if (evt.which === ESC_KEYCODE) {
-    action(activePopup);
-  }
-};
 
 
 class Card {
@@ -72,6 +51,7 @@ class Card {
     this._setEventListeners();
 
     this._cardElement.querySelector(".card__image").setAttribute("src", `${this._link}`);
+    this._cardElement.querySelector(".card__image").setAttribute("alt", `Photo of ${this._name}`);
     this._cardElement.querySelector(".card__description").textContent = this._name;
 
     return this._cardElement;

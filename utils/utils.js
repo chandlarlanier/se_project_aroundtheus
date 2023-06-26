@@ -24,4 +24,4 @@ const isEscEvent = (evt, action) => {
   }
 };
 
-export {openPopupWindow, closePopupWindow, handleEscUp, isEscEvent};
+export {ESC_KEYCODE, openPopupWindow, closePopupWindow, handleEscUp, isEscEvent};

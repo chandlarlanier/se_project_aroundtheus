@@ -10,6 +10,7 @@
   width: 282px;
   height: 282px;
   background-size: cover;
+  cursor: pointer;
 }
 
 .card__delete-button {

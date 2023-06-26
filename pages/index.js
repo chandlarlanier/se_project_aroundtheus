@@ -1,9 +1,6 @@
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
-import { openPopupWindow, closePopupWindow, isEscEvent, handleEscUp } from "../utils/utils.js";
-
-
-const ESC_KEYCODE = 27;
+import { ESC_KEYCODE, openPopupWindow, closePopupWindow, isEscEvent, handleEscUp } from "../utils/utils.js";
 
 const initialCards = [
   {
@@ -67,14 +64,14 @@ const renderCard = (data, wrap) => {
   wrap.prepend(card);
 };
 
-const editFormSubmitHandler = (evt) => {
+const handleEditFormSubmit = (evt) => {
   evt.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closePopupWindow();
 };
 
-const cardFormSubmitHandler = (evt) => {
+const handleCardFormSubmit = (evt) => {
   evt.preventDefault();
   renderCard(
     {name: cardTitleInput.value,
@@ -88,8 +85,8 @@ const cardFormSubmitHandler = (evt) => {
 
 
 // Event Listeners
-profileEditPopup.addEventListener("submit", editFormSubmitHandler);
-addCardPopup.addEventListener("submit", cardFormSubmitHandler);
+profileEditPopup.addEventListener("submit", handleEditFormSubmit);
+addCardPopup.addEventListener("submit", handleCardFormSubmit);
 
 openEditFormButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
