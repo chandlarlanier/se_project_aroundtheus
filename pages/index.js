@@ -1,7 +1,7 @@
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
-import { ESC_KEYCODE, openPopupWindow, closePopupWindow, handleEscUp, closePopupOnRemoteClick } from "../utils/utils.js";
-import initialCards from "../components/constants.js";
+import { openPopupWindow, closePopupWindow, closePopupOnRemoteClick } from "../utils/utils.js";
+import initialCards from "../utils/constants.js";
 
 
 // Card Template
@@ -53,7 +53,7 @@ const handleCardFormSubmit = (evt) => {
     cardList);
   closePopupWindow();
   addCardForm.reset();
-  addFormValidator._toggleButtonState();
+  addFormValidator.toggleButtonState();
 };
 
 

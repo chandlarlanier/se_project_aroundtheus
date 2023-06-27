@@ -1,4 +1,4 @@
-import { ESC_KEYCODE, openPopupWindow, closePopupWindow, handleEscUp } from "../utils/utils.js";
+import { openPopupWindow } from "../utils/utils.js";
 
 const imagePopupWindow = document.querySelector(".popup_type_preview-image");
 const imageElement = imagePopupWindow.querySelector(".popup__image");

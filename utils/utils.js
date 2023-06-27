@@ -18,18 +18,10 @@ const handleEscUp = (evt) => {
   }
 };
 
-const isEscEvent = (evt, action) => {
-  const activePopup = document
-    .querySelector(".popup_opened");
-  if (evt.which === ESC_KEYCODE) {
-    action(activePopup);
-  }
-};
-
 const closePopupOnRemoteClick = (evt) => {
   if (evt.target === evt.currentTarget || evt.target.classList.contains("popup__close-button")) {
     closePopupWindow();
   }
 };
 
-export {ESC_KEYCODE, openPopupWindow, closePopupWindow, handleEscUp, isEscEvent, closePopupOnRemoteClick};
+export {ESC_KEYCODE, openPopupWindow, closePopupWindow, handleEscUp, closePopupOnRemoteClick};
