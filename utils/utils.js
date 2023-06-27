@@ -7,13 +7,14 @@ const openPopupWindow = (popupWindow) => {
 
 const closePopupWindow = () => {
   const activePopup = document.querySelector(".popup_opened");
-  activePopup.classList.remove("popup_opened");
-  document.removeEventListener("keyup", handleEscUp);
+  if (activePopup) {
+    activePopup.classList.remove("popup_opened");
+    document.removeEventListener("keyup", handleEscUp);
+  }
 };
 
 const handleEscUp = (evt) => {
   if (evt.which === ESC_KEYCODE) {
-    evt.preventDefault();
     closePopupWindow();
   }
 };
