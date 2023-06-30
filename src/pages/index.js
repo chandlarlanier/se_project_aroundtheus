@@ -1,7 +1,7 @@
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
-import { openPopupWindow, closePopupWindow, closePopupOnRemoteClick } from "../utils/utils.js";
-import initialCards from "../utils/constants.js";
+import { openPopupWindow, closePopupWindow, closePopupOnRemoteClick } from "../../utils/utils.js";
+import initialCards from "../../utils/constants.js";
 
 
 // Card Template
