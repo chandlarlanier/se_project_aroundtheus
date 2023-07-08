@@ -1,6 +1,6 @@
 class UserInfo {
   constructor(userName, userJob) {
-
+    
   }
 
   getUserInfo() {
@@ -8,6 +8,6 @@ class UserInfo {
   }
 
   setUserInfo() {
-    
+
   }
 }
