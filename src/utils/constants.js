@@ -25,32 +25,8 @@ export const initialCards = [
   }
 ];
 
-// Card Template
-export const cardTemplate = document
-  .querySelector("#card-template")
-  .content.querySelector(".card");
-
-
-// Wrappers
-export const cardList = document.querySelector(".cards__list");
-export const profileEditPopup = document.querySelector(".popup_type_edit-profile");
-export const addCardPopup = document.querySelector(".popup_type_add-card");
-export const previewImagePopup = document.querySelector(".popup_type_preview-image");
-
-
-// Buttons and Other Home Components
-export const openEditFormButton = document.querySelector(".profile__edit-button");
-export const openCardFormButton = document.querySelector(".profile__add-button");
-
-
-// DOM Profile Nodes
-export const profileTitle = document.querySelector(".profile__title");
-export const profileDescription = document.querySelector(".profile__description");
-
-
-// Form Data and Form Elements
-export const profileTitleInput = profileEditPopup.querySelector(".popup__input_type_name");
-export const profileDescriptionInput = profileEditPopup.querySelector(".popup__input_type_description");
-export const cardTitleInput = addCardPopup.querySelector(".popup__input_type_title");
-export const cardImageInput = addCardPopup.querySelector(".popup__input_type_url");
-
+// Selectors
+export const selectors = {
+  cardList: ".cards__list",
+  cardTemplate: ".card-template"
+}

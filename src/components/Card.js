@@ -6,10 +6,11 @@ const imageCaption = imagePopupWindow.querySelector(
   ".popup__heading_type_preview-image"
 );
 
-class Card {
+export default class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
     this._link = data.link;
+
     this._cardSelector = cardSelector;
   }
 
@@ -69,5 +70,3 @@ class Card {
     return this._cardElement;
   }
 }
-
-export default Card;
