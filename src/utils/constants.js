@@ -37,7 +37,8 @@ export const selectors = {
   cardList: ".cards__list",
   cardTemplate: ".card-template",
   previewPopup: ".popup_type_preview-image",
-  editProfilePopup: ".popup_type_edit-profile"
+  editProfilePopup: ".popup_type_edit-profile",
+  addCardPopup: ".popup_type_add-card"
 }
 
 // Validation Settings

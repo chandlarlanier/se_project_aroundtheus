@@ -116,7 +116,6 @@ const cardSection = new Section(
           data,
           handleImageClick: (imgData) => {
             cardPreviewPopup.open(imgData);
-            console.log("from index.js");
           }
         },
         selectors.cardTemplate
@@ -131,11 +130,38 @@ const cardSection = new Section(
 
 // Create form and user info instances
 const userInfo = new UserInfo(userNameElement.textContent, userJobElement.textContent);
-
 const editProfilePopup = new PopupWithForm(selectors.editProfilePopup, () => {
   userInfo.setUserInfo();
 });
 
+
+const addCardPopup = new PopupWithForm(selectors.addCardPopup, () => {
+  const cardTitleInput = document.querySelector(".popup__input_type_title").value;
+  const cardUrlInput = document.querySelector(".popup__input_type_url").value;
+  const newCardData = {name: cardTitleInput, link: cardUrlInput};
+  const newCard = new Card({data: newCardData, handleImageClick: (imgData) => {
+    cardPreviewPopup.open(imgData);
+  }},
+  selectors.cardTemplate);
+  cardSection.addItem(newCard.generateCard());
+});
+
+
+
+// Form validation
+const editFormValidator = new FormValidator(validationSettings, profileEditForm);
+const cardFormValidator = new FormValidator(validationSettings, addCardForm);
+
+// Initialize all class instances
+cardSection.renderItems(initialCards);
+cardPreviewPopup.setEventListeners();
+editProfilePopup.setEventListeners();
+addCardPopup.setEventListeners();
+editFormValidator.enableValidation();
+cardFormValidator.enableValidation();
+
+
+// Add event listeners to buttons
 const profileEditButton = document.querySelector(".profile__edit-button");
 profileEditButton.addEventListener("mousedown", () => {
   const openUserInputValues = userInfo.getUserInfo();
@@ -144,28 +170,7 @@ profileEditButton.addEventListener("mousedown", () => {
   editProfilePopup.open();
 });
 
-
-
-
-
 const addCardButton = document.querySelector(".profile__add-button");
-
-const editFormValidator = new FormValidator(validationSettings, profileEditForm);
-const cardFormValidator = new FormValidator(validationSettings, addCardForm);
-
-
-
-
-
-
-
-
-
-
-
-// Initialize all class instances
-cardSection.renderItems(initialCards);
-cardPreviewPopup.setEventListeners();
-editProfilePopup.setEventListeners();
-editFormValidator.enableValidation();
-cardFormValidator.enableValidation();
+addCardButton.addEventListener("mousedown", () => {
+  addCardPopup.open();
+});
