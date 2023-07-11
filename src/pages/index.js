@@ -96,21 +96,76 @@
 
 
 //////////////////////////////
-
 import Card from "../components/Card.js";
-import {initialCards, selectors} from "../utils/constants.js";
 import Section from "../components/Section.js";
+import Popup from "../components/Popup.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+import FormValidator from "../components/FormValidator.js";
+import {initialCards, selectors, validationSettings, profileEditForm, addCardForm, userNameElement, userJobElement, nameInput, jobInput} from "../utils/constants.js";
 
 
-// Create instances of classes
-const cardSection = new Section({
-  renderer: (item) => {
-    const cardElement = new Card(item, selectors.cardTemplate);
-    cardSection.addItem(cardElement.generateCard());
+// Create card and card image popup instances
+const cardPreviewPopup = new PopupWithImage(selectors.previewPopup);
+const cardSection = new Section(
+  {
+    renderer: (data) => {
+      const cardElement = new Card(
+        {
+          data,
+          handleImageClick: (imgData) => {
+            cardPreviewPopup.open(imgData);
+            console.log("from index.js");
+          }
+        },
+        selectors.cardTemplate
+      );
+      cardSection.addItem(cardElement.generateCard());
+    },
   },
-  selector: selectors.cardList,
+  selectors.cardList
+);
+
+
+
+// Create form and user info instances
+const userInfo = new UserInfo(userNameElement.textContent, userJobElement.textContent);
+
+const editProfilePopup = new PopupWithForm(selectors.editProfilePopup, () => {
+  userInfo.setUserInfo();
 });
+
+const profileEditButton = document.querySelector(".profile__edit-button");
+profileEditButton.addEventListener("mousedown", () => {
+  const openUserInputValues = userInfo.getUserInfo();
+  nameInput.value = openUserInputValues.name;
+  jobInput.value = openUserInputValues.job;
+  editProfilePopup.open();
+});
+
+
+
+
+
+const addCardButton = document.querySelector(".profile__add-button");
+
+const editFormValidator = new FormValidator(validationSettings, profileEditForm);
+const cardFormValidator = new FormValidator(validationSettings, addCardForm);
+
+
+
+
+
+
+
+
+
 
 
 // Initialize all class instances
 cardSection.renderItems(initialCards);
+cardPreviewPopup.setEventListeners();
+editProfilePopup.setEventListeners();
+editFormValidator.enableValidation();
+cardFormValidator.enableValidation();

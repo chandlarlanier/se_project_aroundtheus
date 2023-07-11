@@ -1,3 +1,5 @@
+export const ESC_KEYCODE = 27;
+
 export const initialCards = [
   {
     name: "Yosemite Valley",
@@ -25,8 +27,28 @@ export const initialCards = [
   }
 ];
 
+export const userNameElement = document.querySelector(".profile__title");
+export const userJobElement = document.querySelector(".profile__description");
+export const nameInput = document.querySelector(".popup__input_type_name");
+export const jobInput = document.querySelector(".popup__input_type_description");
+
 // Selectors
 export const selectors = {
   cardList: ".cards__list",
-  cardTemplate: ".card-template"
+  cardTemplate: ".card-template",
+  previewPopup: ".popup_type_preview-image",
+  editProfilePopup: ".popup_type_edit-profile"
 }
+
+// Validation Settings
+export const validationSettings = {
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
+
+// Forms
+export const profileEditForm = document.forms["popup__form_type_edit-profile"];
+export const addCardForm = document.forms["popup__form_type_add-card"];
