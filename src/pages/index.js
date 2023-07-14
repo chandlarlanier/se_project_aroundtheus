@@ -75,3 +75,5 @@ const addCardButton = document.querySelector(".profile__add-button");
 addCardButton.addEventListener("mousedown", () => {
   addCardPopup.open();
 });
+
+console.log(editProfilePopup);
