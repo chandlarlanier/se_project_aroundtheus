@@ -1,3 +1,6 @@
+import Card from "../components/Card.js";
+import { cardSection, cardPreviewPopup } from "../pages/index.js";
+
 export const ESC_KEYCODE = 27;
 
 export const initialCards = [
@@ -30,7 +33,7 @@ export const initialCards = [
 export const userNameElement = document.querySelector(".profile__title");
 export const userJobElement = document.querySelector(".profile__description");
 export const nameInput = document.querySelector(".popup__input_type_name");
-export const jobInput = document.querySelector(".popup__input_type_description");
+export const aboutInput = document.querySelector(".popup__input_type_description");
 
 // Selectors
 export const selectors = {
@@ -38,7 +41,23 @@ export const selectors = {
   cardTemplate: ".card-template",
   previewPopup: ".popup_type_preview-image",
   editProfilePopup: ".popup_type_edit-profile",
-  addCardPopup: ".popup_type_add-card"
+  addCardPopup: ".popup_type_add-card",
+  nameElement: ".profile__title",
+  descriptionElement: ".profile__description"
+}
+
+// Card renderer function
+export const renderCard = (data) => {
+  const cardElement = new Card(
+    {
+      data,
+      handleImageClick: (imgData) => {
+        cardPreviewPopup.open(imgData);
+      }
+    },
+    selectors.cardTemplate
+  );
+  cardSection.addItem(cardElement.generateCard());
 }
 
 // Validation Settings
