@@ -36,7 +36,7 @@ export default class FormValidator {
     }
   }
 
-  _disableButton() {
+  disableButton() {
     this._buttonElement.classList.add(this._inactiveButtonClass);
     this._buttonElement.disabled = true;
   }
@@ -48,7 +48,7 @@ export default class FormValidator {
 
   toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this._disableButton();
+      this.disableButton();
     } else {
       this._enableButton();
     }

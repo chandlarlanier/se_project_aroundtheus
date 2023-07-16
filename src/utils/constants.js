@@ -46,20 +46,6 @@ export const selectors = {
   descriptionElement: ".profile__description"
 }
 
-// Card renderer function
-export const renderCard = (data) => {
-  const cardElement = new Card(
-    {
-      data,
-      handleImageClick: (imgData) => {
-        cardPreviewPopup.open(imgData);
-      }
-    },
-    selectors.cardTemplate
-  );
-  cardSection.addItem(cardElement.generateCard());
-}
-
 // Validation Settings
 export const validationSettings = {
   inputSelector: ".popup__input",

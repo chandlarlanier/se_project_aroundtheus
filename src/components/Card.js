@@ -1,10 +1,3 @@
-const imagePopupWindow = document.querySelector(".popup_type_preview-image");
-const imageElement = imagePopupWindow.querySelector(".popup__image");
-const imageCaption = imagePopupWindow.querySelector(
-  ".popup__heading_type_preview-image"
-);
-
-
 export default class Card {
   constructor({ data, handleImageClick }, cardSelector) {
     this._name = data.name;

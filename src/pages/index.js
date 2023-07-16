@@ -6,7 +6,21 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
-import {initialCards, selectors, renderCard, validationSettings, profileEditForm, addCardForm, userNameElement, userJobElement, nameInput, aboutInput} from "../utils/constants.js";
+import {initialCards, selectors, validationSettings, profileEditForm, addCardForm, nameInput, aboutInput} from "../utils/constants.js";
+
+// Card renderer function
+const renderCard = (data) => {
+  const cardElement = new Card(
+    {
+      data,
+      handleImageClick: (imgData) => {
+        cardPreviewPopup.open(imgData);
+      }
+    },
+    selectors.cardTemplate
+  );
+  cardSection.addItem(cardElement.generateCard());
+}
 
 
 // Create card and card image popup instances
@@ -17,14 +31,12 @@ export const cardSection = new Section({ renderer: renderCard }, selectors.cardL
 // Create form and user info instances
 const userInfo = new UserInfo({nameSelector: selectors.nameElement, aboutMeSelector: selectors.descriptionElement});
 
-const editProfilePopup = new PopupWithForm(selectors.editProfilePopup, () => {
-  userInfo.setUserInfo({name: nameInput.value, about: aboutInput.value});
+const editProfilePopup = new PopupWithForm(selectors.editProfilePopup, (data) => {
+  userInfo.setUserInfo(data);
 });
 
-const addCardPopup = new PopupWithForm(selectors.addCardPopup, () => {
-  const cardTitleInput = document.querySelector(".popup__input_type_title");
-  const cardUrlInput = document.querySelector(".popup__input_type_url");
-  renderCard({name: cardTitleInput.value, link: cardUrlInput.value});
+const addCardPopup = new PopupWithForm(selectors.addCardPopup, (data) => {
+  renderCard(data);
 });
 
 
@@ -48,12 +60,12 @@ profileEditButton.addEventListener("mousedown", () => {
   const info = userInfo.getUserInfo();
   nameInput.value = info.name;
   aboutInput.value = info.about;
-  profileEditForm.querySelector(".popup__button").classList.add("popup__button_disabled");
-  profileEditForm.querySelector(".popup__button").disabled = true;
+  editFormValidator.disableButton();
   editProfilePopup.open();
 });
 
 const addCardButton = document.querySelector(".profile__add-button");
 addCardButton.addEventListener("mousedown", () => {
+  cardFormValidator.disableButton();
   addCardPopup.open();
 });

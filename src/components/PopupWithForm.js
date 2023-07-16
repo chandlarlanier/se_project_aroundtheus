@@ -11,11 +11,9 @@ export default class PopupWithForm extends Popup {
   close() {
     super.close();
     this._popupForm.reset();
-    this._submitButton.classList.add("popup__button_disabled");
-    this._submitButton.disabled = true;
   }
 
-  getInputValues() {
+  _getInputValues() {
     const inputList = [...this._popupForm.querySelectorAll(".popup__input")];
     const inputValues = {};
     for (const input of inputList) {
@@ -29,7 +27,7 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit();
+      this._handleFormSubmit(this._getInputValues());
       this.close();
     });
   }
