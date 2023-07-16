@@ -1,6 +1,3 @@
-import Card from "../components/Card.js";
-import { cardSection, cardPreviewPopup } from "../pages/index.js";
-
 export const ESC_KEYCODE = 27;
 
 export const initialCards = [
