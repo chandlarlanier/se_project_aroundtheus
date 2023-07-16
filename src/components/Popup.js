@@ -24,7 +24,7 @@ export default class Popup {
     this._popupElement
       .querySelector(".popup__close-button")
       .addEventListener("mousedown", () => {
-        this.close
+        this.close();
       });
 
     this._popupElement.addEventListener("mousedown", (evt) => {
