@@ -6,7 +6,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
-import { selectors, validationSettings, profileEditForm, addCardForm, nameInput, aboutInput } from "../utils/constants.js";
+import { selectors, validationSettings, profileEditForm, addCardForm, editAvatarForm, nameInput, aboutInput } from "../utils/constants.js";
 
 const api = new Api({baseUrl: "https://around-api.en.tripleten-services.com/v1", authToken: "70864e59-72d8-4dfd-aa6b-d8a11da17a1d"});
 
@@ -48,19 +48,28 @@ const addCardPopup = new PopupWithForm(selectors.addCardPopup, (data) => {
   renderCard(data);
 });
 
+const editAvatarPopup = new PopupWithForm(selectors.editAvatarPopup, (data) => {
+  UserInfo.setUserInfo(data);
+
+  //above needs to be changed
+});
+
 
 // Form validation
 const editFormValidator = new FormValidator(validationSettings, profileEditForm);
 const cardFormValidator = new FormValidator(validationSettings, addCardForm);
+const avatarFormValidator = new FormValidator(validationSettings, editAvatarForm);
 
 
 // Initialize all class instances
 // cardSection.renderItems(initialCards);
 cardPreviewPopup.setEventListeners();
 editProfilePopup.setEventListeners();
+editAvatarPopup.setEventListeners();
 addCardPopup.setEventListeners();
 editFormValidator.enableValidation();
 cardFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 
 
 // Add event listeners to buttons
@@ -78,3 +87,9 @@ addCardButton.addEventListener("mousedown", () => {
   cardFormValidator.disableButton();
   addCardPopup.open();
 });
+
+const editAvatarImage = document.querySelector(".profile__edit-image");
+editAvatarImage.addEventListener("mousedown", () => {
+  avatarFormValidator.disableButton();
+  editAvatarPopup.open();
+})

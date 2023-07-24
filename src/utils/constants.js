@@ -38,6 +38,7 @@ export const selectors = {
   cardTemplate: ".card-template",
   previewPopup: ".popup_type_preview-image",
   editProfilePopup: ".popup_type_edit-profile",
+  editAvatarPopup: ".popup_type_edit-avatar",
   addCardPopup: ".popup_type_add-card",
   nameElement: ".profile__title",
   descriptionElement: ".profile__description"
@@ -55,3 +56,4 @@ export const validationSettings = {
 // Forms
 export const profileEditForm = document.forms["popup__form_type_edit-profile"];
 export const addCardForm = document.forms["popup__form_type_add-card"];
+export const editAvatarForm = document.forms["popup__form_type_edit-avatar"];
