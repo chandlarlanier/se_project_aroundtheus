@@ -10,16 +10,15 @@
   <body class="page">
     <div class="page__content">
       <header class="page__section header">
-
         <img src="<%=require('./images/logo.svg')%>" alt="Around the US logo" class="header__logo"/>
       </header>
       <main class="page__main">
         <section class="page__section profile">
-          <img src="<%=require('./images/profile-image.png')%>" alt="Avatar" class="profile__image"/>
+          <img src="" alt="Avatar" class="profile__image"/>
           <div class="profile__info">
-            <h1 class="profile__title">Jacques Cousteau</h1>
+            <h1 class="profile__title"></h1>
             <button class="profile__edit-button" type="button" aria-label="Edit info"></button>
-            <p class="profile__description">Explorer</p>
+            <p class="profile__description"></p>
           </div>
           <button class="profile__add-button" type="button" aria-label="Add post"></button>
         </section>
@@ -51,6 +50,21 @@
       </div>
     </div>
 
+    <!-- Edit Avatar Popup -->
+    <div class="popup popup_type_edit-avatar">
+      <div class="popup__container popup__container_type_edit-avatar">
+        <button class="popup__close-button popup__close-button_type_edit-avatar"></button>
+        <h3 class="popup__heading popup__heading_type_edit-avatar">Change profile picture</h3>
+        <form class="popup__form" name="popup__form_type_edit-avatar">
+          <label for="avatar-link" class="popup__label">
+            <input type="url" name="avatar-link" id="avatar-link" placeholder="Link" class="popup__input popup__input_type_avatar" minlength="2" maxlength="500" required>
+            <span class="popup__error" id="avatar-link-error"></span>
+          </label>
+          <button class="popup__button">Save</button>
+        </form>
+      </div>
+    </div>
+
     <!-- Add Card Popup -->
     <div class="popup popup_type_add-card">
       <div class="popup__container popup__container_type_add-card">
@@ -76,6 +90,14 @@
         <button class="popup__close-button popup__close-button_type_preview-image"></button>
         <img src="#" alt="" class="popup__image">
         <h3 class="popup__heading popup__heading_type_preview-image"></h3>
+      </div>
+    </div>
+
+    <!-- Delete Card Popup -->
+    <div class="popup popup_type_delete-card">
+      <div class="popup__container popup__container_type_delete-card">
+        <h3 class="popup__heading popup__heading_type_preview-image">Are you sure?</h3>
+        <button class="popup__close-button popup__close-button_type_delete-card">Yes</button>
       </div>
     </div>
 

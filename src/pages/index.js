@@ -1,12 +1,17 @@
 import "./index.css";
-
+import Api from "../components/Api.js";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
-import {initialCards, selectors, validationSettings, profileEditForm, addCardForm, nameInput, aboutInput} from "../utils/constants.js";
+import {initialCardList2, selectors, validationSettings, profileEditForm, addCardForm, nameInput, aboutInput, initialCardList} from "../utils/constants.js";
+
+const api = new Api({baseUrl: "https://around-api.en.tripleten-services.com/v1", authToken: "70864e59-72d8-4dfd-aa6b-d8a11da17a1d"});
+api.addInitialCards();
+api.getInitialCards();
+api.getUserInfo();
 
 // Card renderer function
 const renderCard = (data) => {
@@ -46,7 +51,7 @@ const cardFormValidator = new FormValidator(validationSettings, addCardForm);
 
 
 // Initialize all class instances
-cardSection.renderItems(initialCards);
+// cardSection.renderItems(initialCards);
 cardPreviewPopup.setEventListeners();
 editProfilePopup.setEventListeners();
 addCardPopup.setEventListeners();
