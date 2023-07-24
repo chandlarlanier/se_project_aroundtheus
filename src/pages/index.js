@@ -6,12 +6,16 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
-import {initialCardList2, selectors, validationSettings, profileEditForm, addCardForm, nameInput, aboutInput, initialCardList} from "../utils/constants.js";
+import { selectors, validationSettings, profileEditForm, addCardForm, nameInput, aboutInput } from "../utils/constants.js";
 
 const api = new Api({baseUrl: "https://around-api.en.tripleten-services.com/v1", authToken: "70864e59-72d8-4dfd-aa6b-d8a11da17a1d"});
-api.addInitialCards();
-api.getInitialCards();
-api.getUserInfo();
+
+api.getUserInfo()
+  .then(res => {
+    document.querySelector(".profile__title").textContent = res.name;
+    document.querySelector(".profile__description").textContent = res.about;
+    document.querySelector(".profile__image").src = res.avatar;
+  });
 
 // Card renderer function
 const renderCard = (data) => {

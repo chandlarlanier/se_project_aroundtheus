@@ -27,35 +27,6 @@ export const ESC_KEYCODE = 27;
 //   }
 // ];
 
-export const initialCardList2 = [
-  {
-        "createdAt": "2023-07-05T08:10:57.741Z",
-    "isLiked": false,
-        "link": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-        "name": "Yosemite Valley",
-        "owner": {
-            "about": "Sailor, researcher",
-            "avatar": "https://practicum-content.s3.us-west-1.amazonaws.com/frontend-developer/common/avatar.jpg",
-          "name": "Jacques Cousteau",
-          "_id": "e20537ed11237f86bbb20ccb"
-        },
-    "_id": "5d1f0611d321eb4bdcd707dd"
-  },
-    {
-        "createdAt": "2023-07-05T08:11:58.324Z",
-    "isLiked": false,
-        "link": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-        "name": "Lake Louise",
-        "owner": {
-            "about": "Sailor, researcher",
-            "avatar": "https://practicum-content.s3.us-west-1.amazonaws.com/frontend-developer/common/avatar.jpg",
-          "name": "Jacques Cousteau",
-          "_id": "e20537ed11237f86bbb20ccb"
-        },
-    "_id": "5d1f064ed321eb4bdcd707de"
-  }
-];
-
 export const userNameElement = document.querySelector(".profile__title");
 export const userJobElement = document.querySelector(".profile__description");
 export const nameInput = document.querySelector(".popup__input_type_name");

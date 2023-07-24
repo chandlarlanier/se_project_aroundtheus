@@ -14,6 +14,31 @@
   margin-right: 25px;
 }
 
+.profile__image-overlay {
+  position: absolute;
+  height: 130px;
+  width: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+}
+
+.profile__image-overlay:hover {
+  opacity: 1;
+}
+
+.profile__edit-image {
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  visibility: inherit;
+  display: inherit;
+  cursor: pointer;
+}
+
 .profile__info {
   display: grid;
   grid-template-areas:
