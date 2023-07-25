@@ -51,4 +51,26 @@ export default class Api {
     });
   }
 
+  updateProfileInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: {
+        authorization: this._authToken,
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        name: document.querySelector(".profile__title").textContent,
+        about: document.querySelector(".profile__description").textContent
+      })
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error updating profile info: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 }

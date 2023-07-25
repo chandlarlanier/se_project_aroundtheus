@@ -42,6 +42,7 @@ const userInfo = new UserInfo({nameSelector: selectors.nameElement, aboutMeSelec
 
 const editProfilePopup = new PopupWithForm(selectors.editProfilePopup, (data) => {
   userInfo.setUserInfo(data);
+  api.updateProfileInfo();
 });
 
 const addCardPopup = new PopupWithForm(selectors.addCardPopup, (data) => {
