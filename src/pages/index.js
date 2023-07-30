@@ -7,8 +7,17 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
 import { selectors, validationSettings, profileEditForm, addCardForm, editAvatarForm, nameInput, aboutInput } from "../utils/constants.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation";
 
-const api = new Api({baseUrl: "https://around-api.en.tripleten-services.com/v1", authToken: "70864e59-72d8-4dfd-aa6b-d8a11da17a1d"});
+const api = new Api({baseUrl: "https://around-api.en.tripleten-services.com/v1", authToken: "9ef0145a-4550-4d8d-9dc2-252c6d573e29"});
+
+const deleteCardPopup = new PopupWithConfirmation({
+  popupSelector: selectors.deleteCardPopup,
+  handleConfirm: (cardId) => {
+    api.deleteCard(cardId);
+  }
+});
+
 
 api.getUserInfo()
   .then(res => {
@@ -21,20 +30,34 @@ api.getUserInfo()
 const renderCard = (data) => {
   const cardElement = new Card(
     {
-      data,
+      data: data,
       handleImageClick: (imgData) => {
         cardPreviewPopup.open(imgData);
-      }
+      },
+      handleDelete: () => {
+        api.deleteCard();
+      },
+      confirmPopup: deleteCardPopup,
+      api: api
     },
     selectors.cardTemplate
   );
   cardSection.addItem(cardElement.generateCard());
 }
 
+api.getInitialCards()
+  .then((res) => {
+    res.forEach((card) => {
+      renderCard(card);
+    });
+  });
+
 
 // Create card and card image popup instances
 export const cardPreviewPopup = new PopupWithImage(selectors.previewPopup);
 export const cardSection = new Section({ renderer: renderCard }, selectors.cardList);
+
+
 
 
 // Create form and user info instances
@@ -46,14 +69,16 @@ const editProfilePopup = new PopupWithForm(selectors.editProfilePopup, (data) =>
 });
 
 const addCardPopup = new PopupWithForm(selectors.addCardPopup, (data) => {
-  renderCard(data);
+  api.addCard(data)
+    .then((res) => {
+      renderCard(res);
+    });
 });
 
 const editAvatarPopup = new PopupWithForm(selectors.editAvatarPopup, (data) => {
-  UserInfo.setUserInfo(data);
-
-  //above needs to be changed
+  api.updateAvatar(data);
 });
+
 
 
 // Form validation
@@ -68,6 +93,7 @@ cardPreviewPopup.setEventListeners();
 editProfilePopup.setEventListeners();
 editAvatarPopup.setEventListeners();
 addCardPopup.setEventListeners();
+deleteCardPopup.setEventListeners();
 editFormValidator.enableValidation();
 cardFormValidator.enableValidation();
 avatarFormValidator.enableValidation();

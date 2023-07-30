@@ -1,10 +1,24 @@
+import {api} from "../pages/index.js"
+import { deleteCardPopup } from "../pages/index.js";
+// need to refactor handle delete process
+// trash can icon on card opens delete popup
+// delete button on popup deletes card
+
 export default class Card {
-  constructor({ data, handleImageClick }, cardSelector) {
+  constructor({ data, handleImageClick, handleDelete, confirmPopup, api }, cardSelector) {
     this._name = data.name;
     this._link = data.link;
+    this._id = data._id;
+
+    this._handleImageClick = handleImageClick;
+
+    this._handleDelete = handleDelete;
+
+    this._confirmPopup = confirmPopup;
+
+    this._api = api;
 
     this._cardSelector = cardSelector;
-    this._handleImageClick = handleImageClick;
   }
 
   _getTemplate() {
@@ -16,18 +30,31 @@ export default class Card {
     return cardElement;
   }
 
-  _handleDeleteCard() {
-    this._cardElement.remove();
-    this._cardElement = null;
+  getId() {
+    return this._id;
+  }
+
+  removeCard(card) {
+    card._cardElement.remove();
+    card._cardElement = null;
   }
 
   _handleLikeIcon() {
-    this._cardElement.querySelector(".card__like-button").classList.toggle("card__like-button_active");
+    this._likeButton.classList.toggle("card__like-button_active");
+    if (this._cardElement.querySelector(".card__like-button_active")) {
+      this._api.likeCard(this.getId());
+    } else {
+      this._api.unlikeCard(this.getId());
+    }
   }
+
 
   _setEventListeners() {
     this._likeButton.addEventListener("mousedown", () => this._handleLikeIcon());
-    this._deleteButton.addEventListener("mousedown", () => this._handleDeleteCard());
+    this._binIcon.addEventListener("mousedown", () => {
+      this._confirmPopup.open(this, this.getId(), this.removeCard);
+    });
+
     this._cardImage.addEventListener("mousedown", () => {
       this._handleImageClick({ link: this._link, name: this._name });
     });
@@ -35,8 +62,9 @@ export default class Card {
 
   generateCard() {
     this._cardElement = this._getTemplate();
+
     this._likeButton = this._cardElement.querySelector(".card__like-button");
-    this._deleteButton = this._cardElement.querySelector(".card__delete-button");
+    this._binIcon = this._cardElement.querySelector(".card__delete-button");
     this._cardImage = this._cardElement.querySelector(".card__image");
     this._cardDescription = this._cardElement.querySelector(".card__description");
 

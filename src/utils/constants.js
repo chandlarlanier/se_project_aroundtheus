@@ -40,6 +40,7 @@ export const selectors = {
   editProfilePopup: ".popup_type_edit-profile",
   editAvatarPopup: ".popup_type_edit-avatar",
   addCardPopup: ".popup_type_add-card",
+  deleteCardPopup: ".popup_type_delete-card",
   nameElement: ".profile__title",
   descriptionElement: ".profile__description"
 }

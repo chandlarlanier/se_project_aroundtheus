@@ -42,13 +42,80 @@ export default class Api {
       })
   }
 
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._authToken
+      }
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error deleting card from api: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  likeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: {
+        authorization: this._authToken,
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        isLiked: true
+      })
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error liking card in api: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  unlikeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._authToken
+      }
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error unliking card in api: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       method: "GET",
       headers: {
         authorization: this._authToken
       }
-    });
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error getting initial cards: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   updateProfileInfo() {
@@ -73,4 +140,42 @@ export default class Api {
         console.log(err);
       })
   }
+
+  updateAvatar(data) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: {
+        authorization: this._authToken,
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error updating profile image: ${res.status}`);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  // getAvatar() {
+  //   return fetch(`${this._baseUrl}/users/me/avatar`, {
+  //     method: "GET",
+  //     headers: {
+  //       authorization: this._authToken
+  //     }
+  //   })
+  //     .then((res) => {
+  //       if (res.ok) {
+  //         return res.json();
+  //       }
+  //       return Promise.reject(`Error getting avatar from api: ${res.status}`);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  // }
 }
