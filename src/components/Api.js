@@ -18,7 +18,7 @@ export default class Api {
         return Promise.reject(`Error getting user info: ${res.status}`);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       })
   }
 
@@ -38,7 +38,7 @@ export default class Api {
         return Promise.reject(`Error adding card: ${res.status}`)
       })
       .catch((err) => {
-        console.log(err)
+        console.error(err)
       })
   }
 
@@ -56,7 +56,7 @@ export default class Api {
         return Promise.reject(`Error deleting card from api: ${res.status}`);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       })
   }
 
@@ -78,7 +78,7 @@ export default class Api {
         return Promise.reject(`Error liking card in api: ${res.status}`);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       })
   }
 
@@ -96,7 +96,7 @@ export default class Api {
         return Promise.reject(`Error unliking card in api: ${res.status}`);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       })
   }
 
@@ -114,7 +114,7 @@ export default class Api {
         return Promise.reject(`Error getting initial cards: ${res.status}`);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       })
   }
 
@@ -137,7 +137,7 @@ export default class Api {
         return Promise.reject(`Error updating profile info: ${res.status}`);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       })
   }
 
@@ -157,25 +157,7 @@ export default class Api {
         return Promise.reject(`Error updating profile image: ${res.status}`);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       })
   }
-
-  // getAvatar() {
-  //   return fetch(`${this._baseUrl}/users/me/avatar`, {
-  //     method: "GET",
-  //     headers: {
-  //       authorization: this._authToken
-  //     }
-  //   })
-  //     .then((res) => {
-  //       if (res.ok) {
-  //         return res.json();
-  //       }
-  //       return Promise.reject(`Error getting avatar from api: ${res.status}`);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     })
-  // }
 }

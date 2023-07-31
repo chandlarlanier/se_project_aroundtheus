@@ -8,9 +8,22 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
   }
 
+  handleLoading(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = "Saving...";
+    } else {
+      this._submitButton.textContent = "Save";
+    }
+  }
+
   close() {
     super.close();
     this._popupForm.reset();
+  }
+
+  open() {
+    this.handleLoading(false);
+    super.open();
   }
 
   _getInputValues() {
@@ -27,8 +40,11 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit(this._getInputValues());
-      this.close();
+      this.handleLoading(true);
+      this._handleFormSubmit(this._getInputValues())
+        .then(() => {
+          this.close();
+        })
     });
   }
 }

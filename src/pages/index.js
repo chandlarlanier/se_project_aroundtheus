@@ -47,7 +47,7 @@ const renderCard = (data) => {
 
 api.getInitialCards()
   .then((res) => {
-    res.forEach((card) => {
+    res.reverse().forEach((card) => {
       renderCard(card);
     });
   });
@@ -65,18 +65,18 @@ const userInfo = new UserInfo({nameSelector: selectors.nameElement, aboutMeSelec
 
 const editProfilePopup = new PopupWithForm(selectors.editProfilePopup, (data) => {
   userInfo.setUserInfo(data);
-  api.updateProfileInfo();
+  return api.updateProfileInfo();
 });
 
 const addCardPopup = new PopupWithForm(selectors.addCardPopup, (data) => {
-  api.addCard(data)
+  return api.addCard(data)
     .then((res) => {
       renderCard(res);
     });
 });
 
 const editAvatarPopup = new PopupWithForm(selectors.editAvatarPopup, (data) => {
-  api.updateAvatar(data);
+  return api.updateAvatar(data);
 });
 
 

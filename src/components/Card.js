@@ -9,6 +9,7 @@ export default class Card {
     this._name = data.name;
     this._link = data.link;
     this._id = data._id;
+    this._isLiked = data.isLiked;
 
     this._handleImageClick = handleImageClick;
 
@@ -48,6 +49,12 @@ export default class Card {
     }
   }
 
+  _setLike() {
+    if (this._isLiked) {
+      this._likeButton.classList.add("card__like-button_active");
+    }
+  }
+
 
   _setEventListeners() {
     this._likeButton.addEventListener("mousedown", () => this._handleLikeIcon());
@@ -69,6 +76,7 @@ export default class Card {
     this._cardDescription = this._cardElement.querySelector(".card__description");
 
     this._setEventListeners();
+    this._setLike();
 
     this._cardImage.src = this._link;
     this._cardImage.alt = `Photo of ${this._name}`;
