@@ -74,7 +74,10 @@ const addCardPopup = new PopupWithForm(selectors.addCardPopup, (data) => {
 });
 
 const editAvatarPopup = new PopupWithForm(selectors.editAvatarPopup, (data) => {
-  return api.updateAvatar(data);
+  return api.updateAvatar(data)
+    .then((res) => {
+      document.querySelector(".profile__image").src = res.avatar;
+    })
 });
 
 const deleteCardPopup = new PopupWithConfirmation({

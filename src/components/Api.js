@@ -148,7 +148,9 @@ export default class Api {
         authorization: this._authToken,
         "content-type": "application/json"
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        avatar: data.avatar
+      })
     })
       .then((res) => {
         if (res.ok) {
