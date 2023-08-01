@@ -19,13 +19,6 @@ const deleteCardPopup = new PopupWithConfirmation({
 });
 
 
-api.getUserInfo()
-  .then(res => {
-    document.querySelector(".profile__title").textContent = res.name;
-    document.querySelector(".profile__description").textContent = res.about;
-    document.querySelector(".profile__image").src = res.avatar;
-  });
-
 // Card renderer function
 const renderCard = (data) => {
   const cardElement = new Card(
@@ -45,12 +38,22 @@ const renderCard = (data) => {
   cardSection.addItem(cardElement.generateCard());
 }
 
+api.getUserInfo()
+  .then(res => {
+    document.querySelector(".profile__title").textContent = res.name;
+    document.querySelector(".profile__description").textContent = res.about;
+    document.querySelector(".profile__image").src = res.avatar;
+  });
+
+
 api.getInitialCards()
   .then((res) => {
     res.reverse().forEach((card) => {
       renderCard(card);
     });
   });
+
+
 
 
 // Create card and card image popup instances
