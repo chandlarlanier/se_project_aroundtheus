@@ -1,9 +1,3 @@
-import {api} from "../pages/index.js"
-import { deleteCardPopup } from "../pages/index.js";
-// need to refactor handle delete process
-// trash can icon on card opens delete popup
-// delete button on popup deletes card
-
 export default class Card {
   constructor({ data, handleImageClick, handleDelete, confirmPopup, api }, cardSelector) {
     this._name = data.name;

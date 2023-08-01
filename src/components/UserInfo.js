@@ -1,5 +1,3 @@
-import { userNameElement, userJobElement, nameInput, jobInput } from "../utils/constants.js";
-
 export default class UserInfo {
   constructor({ nameSelector , aboutMeSelector }) {
     this._nameElement = document.querySelector(nameSelector);

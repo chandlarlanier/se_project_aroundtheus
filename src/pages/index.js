@@ -9,14 +9,9 @@ import FormValidator from "../components/FormValidator.js";
 import { selectors, validationSettings, profileEditForm, addCardForm, editAvatarForm, nameInput, aboutInput } from "../utils/constants.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
 
+// Initialize api
 const api = new Api({baseUrl: "https://around-api.en.tripleten-services.com/v1", authToken: "9ef0145a-4550-4d8d-9dc2-252c6d573e29"});
 
-const deleteCardPopup = new PopupWithConfirmation({
-  popupSelector: selectors.deleteCardPopup,
-  handleConfirm: (cardId) => {
-    api.deleteCard(cardId);
-  }
-});
 
 
 // Card renderer function
@@ -38,6 +33,9 @@ const renderCard = (data) => {
   cardSection.addItem(cardElement.generateCard());
 }
 
+
+
+// Get initial user information and cards
 api.getUserInfo()
   .then(res => {
     document.querySelector(".profile__title").textContent = res.name;
@@ -45,9 +43,8 @@ api.getUserInfo()
     document.querySelector(".profile__image").src = res.avatar;
   });
 
-
 api.getInitialCards()
-  .then((res) => {
+  .then(res => {
     res.reverse().forEach((card) => {
       renderCard(card);
     });
@@ -55,11 +52,9 @@ api.getInitialCards()
 
 
 
-
 // Create card and card image popup instances
 export const cardPreviewPopup = new PopupWithImage(selectors.previewPopup);
 export const cardSection = new Section({ renderer: renderCard }, selectors.cardList);
-
 
 
 
@@ -82,6 +77,13 @@ const editAvatarPopup = new PopupWithForm(selectors.editAvatarPopup, (data) => {
   return api.updateAvatar(data);
 });
 
+const deleteCardPopup = new PopupWithConfirmation({
+  popupSelector: selectors.deleteCardPopup,
+  handleConfirm: (cardId) => {
+    api.deleteCard(cardId);
+  }
+});
+
 
 
 // Form validation
@@ -90,19 +92,24 @@ const cardFormValidator = new FormValidator(validationSettings, addCardForm);
 const avatarFormValidator = new FormValidator(validationSettings, editAvatarForm);
 
 
-// Initialize all class instances
-// cardSection.renderItems(initialCards);
+
+// Initialize popups
 cardPreviewPopup.setEventListeners();
 editProfilePopup.setEventListeners();
 editAvatarPopup.setEventListeners();
 addCardPopup.setEventListeners();
 deleteCardPopup.setEventListeners();
+
+
+
+// Initialize form validators
 editFormValidator.enableValidation();
 cardFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
 
 
-// Add event listeners to buttons
+
+// Add event listeners to buttons and profile image
 const profileEditButton = document.querySelector(".profile__edit-button");
 profileEditButton.addEventListener("mousedown", () => {
   const info = userInfo.getUserInfo();
