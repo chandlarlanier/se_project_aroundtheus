@@ -13,6 +13,13 @@ import PopupWithConfirmation from "../components/PopupWithConfirmation";
 const api = new Api({baseUrl: "https://around-api.en.tripleten-services.com/v1", authToken: "9ef0145a-4550-4d8d-9dc2-252c6d573e29"});
 
 
+// create delete card popup
+const deleteCardPopup = new PopupWithConfirmation({
+  popupSelector: selectors.deleteCardPopup,
+  handleConfirm: (cardId) => {
+    api.deleteCard(cardId);
+  }
+});
 
 // Card renderer function
 const renderCard = (data) => {
@@ -22,8 +29,12 @@ const renderCard = (data) => {
       handleImageClick: (imgData) => {
         cardPreviewPopup.open(imgData);
       },
-      handleDelete: () => {
-        api.deleteCard();
+      handleDelete: (card) => {
+        deleteCardPopup.open(card);
+        deleteCardPopup.setSubmitAction((card) => {
+          api.deleteCard(card.getId());
+          card.removeCard();
+        });
       },
       confirmPopup: deleteCardPopup,
       api: api
@@ -80,12 +91,6 @@ const editAvatarPopup = new PopupWithForm(selectors.editAvatarPopup, (data) => {
     })
 });
 
-const deleteCardPopup = new PopupWithConfirmation({
-  popupSelector: selectors.deleteCardPopup,
-  handleConfirm: (cardId) => {
-    api.deleteCard(cardId);
-  }
-});
 
 
 

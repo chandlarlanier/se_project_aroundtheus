@@ -29,9 +29,10 @@ export default class Card {
     return this._id;
   }
 
-  removeCard(card) {
-    card._cardElement.remove();
-    card._cardElement = null;
+
+  removeCard() {
+    this._cardElement.remove();
+    this._cardElement = null;
   }
 
   _handleLikeIcon() {
@@ -53,7 +54,7 @@ export default class Card {
   _setEventListeners() {
     this._likeButton.addEventListener("mousedown", () => this._handleLikeIcon());
     this._binIcon.addEventListener("mousedown", () => {
-      this._confirmPopup.open(this, this.getId(), this.removeCard);
+      this._handleDelete(this);
     });
 
     this._cardImage.addEventListener("mousedown", () => {
