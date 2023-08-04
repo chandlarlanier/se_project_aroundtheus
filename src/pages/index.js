@@ -10,7 +10,13 @@ import { selectors, validationSettings, profileEditForm, addCardForm, editAvatar
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
 
 // Initialize api
-const api = new Api({baseUrl: "https://around-api.en.tripleten-services.com/v1", authToken: "9ef0145a-4550-4d8d-9dc2-252c6d573e29"});
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "9ef0145a-4550-4d8d-9dc2-252c6d573e29",
+    "content-type": "application/json"
+  }
+});
 
 
 // create delete card popup
@@ -52,6 +58,9 @@ api.getUserInfo()
     document.querySelector(".profile__title").textContent = res.name;
     document.querySelector(".profile__description").textContent = res.about;
     document.querySelector(".profile__image").src = res.avatar;
+  })
+  .catch((err) => {
+    console.error(err);
   });
 
 api.getInitialCards()
@@ -59,6 +68,9 @@ api.getInitialCards()
     res.reverse().forEach((card) => {
       renderCard(card);
     });
+  })
+  .catch((err) => {
+    console.error(err);
   });
 
 
@@ -74,13 +86,19 @@ const userInfo = new UserInfo({nameSelector: selectors.nameElement, aboutMeSelec
 
 const editProfilePopup = new PopupWithForm(selectors.editProfilePopup, (data) => {
   userInfo.setUserInfo(data);
-  return api.updateProfileInfo();
+  return api.updateProfileInfo()
+    .catch((err) => {
+      console.error(err);
+    });
 });
 
 const addCardPopup = new PopupWithForm(selectors.addCardPopup, (data) => {
   return api.addCard(data)
     .then((res) => {
       renderCard(res);
+    })
+    .catch((err) => {
+      console.error(err);
     });
 });
 
@@ -88,6 +106,9 @@ const editAvatarPopup = new PopupWithForm(selectors.editAvatarPopup, (data) => {
   return api.updateAvatar(data)
     .then((res) => {
       document.querySelector(".profile__image").src = res.avatar;
+    })
+    .catch((err) => {
+      console.error(err);
     })
 });
 

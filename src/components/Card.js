@@ -38,9 +38,15 @@ export default class Card {
   _handleLikeIcon() {
     this._likeButton.classList.toggle("card__like-button_active");
     if (this._cardElement.querySelector(".card__like-button_active")) {
-      this._api.likeCard(this.getId());
+      this._api.likeCard(this.getId())
+        .catch((err) => {
+          console.error(err);
+        })
     } else {
-      this._api.unlikeCard(this.getId());
+      this._api.unlikeCard(this.getId())
+        .catch((err) => {
+          console.error(err);
+        })
     }
   }
 

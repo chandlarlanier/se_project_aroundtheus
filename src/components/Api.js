@@ -1,15 +1,13 @@
 export default class Api {
-  constructor({baseUrl, authToken}) {
+  constructor({baseUrl, headers}) {
     this._baseUrl = baseUrl;
-    this._authToken = authToken;
+    this._headers = headers;
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
-      headers: {
-        authorization: this._authToken
-      }
+      headers: this._headers
     })
       .then((res) => {
         if (res.ok) {
@@ -17,18 +15,12 @@ export default class Api {
         }
         return Promise.reject(`Error getting user info: ${res.status}`);
       })
-      .catch((err) => {
-        console.error(err);
-      })
   }
 
   addCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: {
-        authorization: this._authToken,
-        "content-type": "application/json"
-      },
+      headers: this._headers,
       body: JSON.stringify(data)
     })
       .then((res) => {
@@ -37,17 +29,12 @@ export default class Api {
         }
         return Promise.reject(`Error adding card: ${res.status}`)
       })
-      .catch((err) => {
-        console.error(err)
-      })
   }
 
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-      headers: {
-        authorization: this._authToken
-      }
+      headers: this._headers
     })
       .then((res) => {
         if (res.ok) {
@@ -63,10 +50,7 @@ export default class Api {
   likeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
-      headers: {
-        authorization: this._authToken,
-        "content-type": "application/json"
-      },
+      headers: this._headers,
       body: JSON.stringify({
         isLiked: true
       })
@@ -77,17 +61,12 @@ export default class Api {
         }
         return Promise.reject(`Error liking card in api: ${res.status}`);
       })
-      .catch((err) => {
-        console.error(err);
-      })
   }
 
   unlikeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
-      headers: {
-        authorization: this._authToken
-      }
+      headers: this._headers
     })
       .then((res) => {
         if (res.ok) {
@@ -95,17 +74,12 @@ export default class Api {
         }
         return Promise.reject(`Error unliking card in api: ${res.status}`);
       })
-      .catch((err) => {
-        console.error(err);
-      })
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       method: "GET",
-      headers: {
-        authorization: this._authToken
-      }
+      headers: this._headers
     })
       .then((res) => {
         if (res.ok) {
@@ -113,18 +87,12 @@ export default class Api {
         }
         return Promise.reject(`Error getting initial cards: ${res.status}`);
       })
-      .catch((err) => {
-        console.error(err);
-      })
   }
 
   updateProfileInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: this._authToken,
-        "content-type": "application/json"
-      },
+      headers: this._headers,
       body: JSON.stringify({
         name: document.querySelector(".profile__title").textContent,
         about: document.querySelector(".profile__description").textContent
@@ -136,18 +104,12 @@ export default class Api {
         }
         return Promise.reject(`Error updating profile info: ${res.status}`);
       })
-      .catch((err) => {
-        console.error(err);
-      })
   }
 
   updateAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: {
-        authorization: this._authToken,
-        "content-type": "application/json"
-      },
+      headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar
       })
@@ -157,9 +119,6 @@ export default class Api {
           return res.json();
         }
         return Promise.reject(`Error updating profile image: ${res.status}`);
-      })
-      .catch((err) => {
-        console.error(err);
       })
   }
 
