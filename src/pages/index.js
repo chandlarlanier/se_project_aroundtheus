@@ -55,9 +55,7 @@ const renderCard = (data) => {
 // Get initial user information and cards
 api.getUserInfo()
   .then(res => {
-    document.querySelector(".profile__title").textContent = res.name;
-    document.querySelector(".profile__description").textContent = res.about;
-    document.querySelector(".profile__image").src = res.avatar;
+    userInfo.setUserInfo(res);
   })
   .catch((err) => {
     console.error(err);
@@ -82,7 +80,7 @@ export const cardSection = new Section({ renderer: renderCard }, selectors.cardL
 
 
 // Create form and user info instances
-const userInfo = new UserInfo({nameSelector: selectors.nameElement, aboutMeSelector: selectors.descriptionElement});
+const userInfo = new UserInfo({nameSelector: selectors.nameElement, aboutMeSelector: selectors.descriptionElement, avatarSelector: selectors.avatarElement});
 
 const editProfilePopup = new PopupWithForm(selectors.editProfilePopup, (data) => {
   userInfo.setUserInfo(data);

@@ -42,7 +42,8 @@ export const selectors = {
   addCardPopup: ".popup_type_add-card",
   deleteCardPopup: ".popup_type_delete-card",
   nameElement: ".profile__title",
-  descriptionElement: ".profile__description"
+  descriptionElement: ".profile__description",
+  avatarElement: ".profile__image"
 }
 
 // Validation Settings

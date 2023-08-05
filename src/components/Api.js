@@ -4,16 +4,20 @@ export default class Api {
     this._headers = headers;
   }
 
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Error: ${res.status}`);
+  }
+
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error getting user info: ${res.status}`);
+      .then(res => {
+        return this._checkResponse(res);
       })
   }
 
@@ -23,11 +27,8 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(data)
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error adding card: ${res.status}`)
+      .then(res => {
+        return this._checkResponse(res);
       })
   }
 
@@ -36,14 +37,8 @@ export default class Api {
       method: "DELETE",
       headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error deleting card from api: ${res.status}`);
-      })
-      .catch((err) => {
-        console.error(err);
+      .then(res => {
+        return this._checkResponse(res);
       })
   }
 
@@ -55,11 +50,8 @@ export default class Api {
         isLiked: true
       })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error liking card in api: ${res.status}`);
+      .then(res => {
+        return this._checkResponse(res);
       })
   }
 
@@ -68,11 +60,8 @@ export default class Api {
       method: "DELETE",
       headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error unliking card in api: ${res.status}`);
+      .then(res => {
+        return this._checkResponse(res);
       })
   }
 
@@ -81,11 +70,8 @@ export default class Api {
       method: "GET",
       headers: this._headers
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error getting initial cards: ${res.status}`);
+      .then(res => {
+        return this._checkResponse(res);
       })
   }
 
@@ -98,11 +84,8 @@ export default class Api {
         about: document.querySelector(".profile__description").textContent
       })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error updating profile info: ${res.status}`);
+      .then(res => {
+        return this._checkResponse(res);
       })
   }
 
@@ -114,11 +97,8 @@ export default class Api {
         avatar: data.avatar
       })
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error updating profile image: ${res.status}`);
+      .then(res => {
+        return this._checkResponse(res);
       })
   }
 
