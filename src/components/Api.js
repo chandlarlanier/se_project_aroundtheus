@@ -16,9 +16,7 @@ export default class Api {
       method: "GET",
       headers: this._headers
     })
-      .then(res => {
-        return this._checkResponse(res);
-      })
+      .then(this._checkResponse);
   }
 
   addCard(data) {
@@ -27,9 +25,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(data)
     })
-      .then(res => {
-        return this._checkResponse(res);
-      })
+      .then(this._checkResponse);
   }
 
   deleteCard(cardId) {
@@ -37,9 +33,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers
     })
-      .then(res => {
-        return this._checkResponse(res);
-      })
+      .then(this._checkResponse);
   }
 
   likeCard(cardId) {
@@ -50,9 +44,7 @@ export default class Api {
         isLiked: true
       })
     })
-      .then(res => {
-        return this._checkResponse(res);
-      })
+      .then(this._checkResponse);
   }
 
   unlikeCard(cardId) {
@@ -60,9 +52,7 @@ export default class Api {
       method: "DELETE",
       headers: this._headers
     })
-      .then(res => {
-        return this._checkResponse(res);
-      })
+      .then(this._checkResponse);
   }
 
   getInitialCards() {
@@ -70,9 +60,7 @@ export default class Api {
       method: "GET",
       headers: this._headers
     })
-      .then(res => {
-        return this._checkResponse(res);
-      })
+      .then(this._checkResponse);
   }
 
   updateProfileInfo() {
@@ -84,9 +72,7 @@ export default class Api {
         about: document.querySelector(".profile__description").textContent
       })
     })
-      .then(res => {
-        return this._checkResponse(res);
-      })
+      .then(this._checkResponse);
   }
 
   updateAvatar(data) {
@@ -97,9 +83,7 @@ export default class Api {
         avatar: data.avatar
       })
     })
-      .then(res => {
-        return this._checkResponse(res);
-      })
+      .then(this._checkResponse);
   }
 
 }
