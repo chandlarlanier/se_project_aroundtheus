@@ -1,5 +1,3 @@
-import FormValidator from "../components/FormValidator";
-
 export const ESC_KEYCODE = 27;
 
 export const userNameElement = document.querySelector(".profile__title");

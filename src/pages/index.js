@@ -6,7 +6,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import FormValidator from "../components/FormValidator.js";
-import { selectors, validationSettings, profileEditForm, addCardForm, editAvatarForm, nameInput, aboutInput } from "../utils/constants.js";
+import { selectors, validationSettings, profileEditForm, addCardForm, editAvatarForm } from "../utils/constants.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
 
 
