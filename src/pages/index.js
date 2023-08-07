@@ -11,14 +11,14 @@ import PopupWithConfirmation from "../components/PopupWithConfirmation";
 
 
 // Catch error function
-function catchError(err) {
+export function catchError(err) {
   console.error(err);
 }
 
 
 
 // Initialize api
-const api = new Api({
+export const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
     authorization: "9ef0145a-4550-4d8d-9dc2-252c6d573e29",
@@ -43,18 +43,18 @@ const renderCard = (data) => {
       handleImageClick: (imgData) => {
         cardPreviewPopup.open(imgData);
       },
-      handleDelete: (card) => {
-        deleteCardPopup.open(card);
-        deleteCardPopup.setSubmitAction((card) => {
-          api.deleteCard(card.getId())
-            .then(() => {
-              card.removeCard();
-            })
-            .catch(catchError)
-            .finally(() => {
-              deleteCardPopup.close();
-            })
-        });
+      handleDelete: (card, cardId) => {
+        deleteCardPopup.open(card, cardId);
+        // deleteCardPopup.setSubmitAction((card) => {
+        //   api.deleteCard(card.getId())
+        //     .then(() => {
+        //       card.removeCard();
+        //     })
+        //     .catch(catchError)
+        //     .finally(() => {
+        //       deleteCardPopup.close();
+        //     })
+        // });
       },
       confirmPopup: deleteCardPopup,
       api: api

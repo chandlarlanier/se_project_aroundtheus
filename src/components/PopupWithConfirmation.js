@@ -1,4 +1,5 @@
 import Popup from "./Popup.js";
+import { api, catchError } from "../pages/index.js";
 
 export default class PopupWithConfirmation extends Popup {
   constructor({ popupSelector }) {
@@ -7,14 +8,29 @@ export default class PopupWithConfirmation extends Popup {
   }
 
   setSubmitAction(submitAction) {
-    this._confirmButton.addEventListener("mousedown", () => {
-      return submitAction(this._card);
-    });
+    this._submitAction = submitAction;
   }
 
-  open(card) {
+  open(card, cardId) {
     super.open();
     this._card = card;
+    this._cardId = cardId;
   }
 
+  setEventListeners() {
+    super.setEventListeners();
+
+    this.setSubmitAction(() => {
+      api.deleteCard(this._cardId)
+        .then(() => {
+          this._card.removeCard();
+        })
+        .catch(catchError)
+        .finally(() => {
+          this.close();
+        });
+    });
+
+    this._confirmButton.addEventListener("click", this._submitAction);
+  }
 }
