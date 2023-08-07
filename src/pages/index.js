@@ -45,16 +45,6 @@ const renderCard = (data) => {
       },
       handleDelete: (card, cardId) => {
         deleteCardPopup.open(card, cardId);
-        // deleteCardPopup.setSubmitAction((card) => {
-        //   api.deleteCard(card.getId())
-        //     .then(() => {
-        //       card.removeCard();
-        //     })
-        //     .catch(catchError)
-        //     .finally(() => {
-        //       deleteCardPopup.close();
-        //     })
-        // });
       },
       confirmPopup: deleteCardPopup,
       api: api
@@ -76,9 +66,7 @@ export const cardSection = new Section({ renderer: renderCard }, selectors.cardL
  Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
     userInfo.setUserInfo(userData);
-    cards.reverse().forEach((card) => {
-      renderCard(card);
-    })
+    cardSection.renderItems(cards.reverse());
   })
   .catch(catchError);
 
