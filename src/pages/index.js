@@ -9,10 +9,13 @@ import FormValidator from "../components/FormValidator.js";
 import { selectors, validationSettings, profileEditForm, addCardForm, editAvatarForm, nameInput, aboutInput } from "../utils/constants.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
 
+
 // Catch error function
 function catchError(err) {
   console.error(err);
 }
+
+
 
 // Initialize api
 const api = new Api({
@@ -24,22 +27,13 @@ const api = new Api({
 });
 
 
+
 // create delete card popup
 const deleteCardPopup = new PopupWithConfirmation({
   popupSelector: selectors.deleteCardPopup
-  // handleConfirm: (cardId) => {
-  //   return api.deleteCard(cardId)
-  //     .then((res) => {
-  //       console.log("hello");
-  //       document.querySelector(".popup_type_delete-card").classList.remove("popup_opened");
-  //     })
-  //     .catch((err) => {
-  //       this.close();
-  //       console.log("bye");
-  //       catchError(err);
-  //     })
-  // }
 });
+
+
 
 // Card renderer function
 const renderCard = (data) => {
@@ -76,20 +70,7 @@ const renderCard = (data) => {
 export const cardPreviewPopup = new PopupWithImage(selectors.previewPopup);
 export const cardSection = new Section({ renderer: renderCard }, selectors.cardList);
 
-// Get initial user information and cards
-// api.getUserInfo()
-//   .then(res => {
-//     userInfo.setUserInfo(res);
-//   })
-//   .catch(catchError);
 
-// api.getInitialCards()
-//   .then(res => {
-//     res.reverse().forEach((card) => {
-//       renderCard(card);
-//     });
-//   })
-//   .catch(catchError);
 
 // Get initial user data and cards
  Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -102,13 +83,13 @@ export const cardSection = new Section({ renderer: renderCard }, selectors.cardL
   .catch(catchError);
 
 
-// Create form and user info instances
+
+// Create user info class
 const userInfo = new UserInfo({nameSelector: selectors.nameElement, aboutMeSelector: selectors.descriptionElement, avatarSelector: selectors.avatarElement});
 
 
 
-
-
+// Create popups with forms
 const editProfilePopup = new PopupWithForm(selectors.editProfilePopup, (data) => {
   return api.updateProfileInfo(data)
     .then(() => {
@@ -117,7 +98,6 @@ const editProfilePopup = new PopupWithForm(selectors.editProfilePopup, (data) =>
     .catch(catchError);
 });
 
-
 const addCardPopup = new PopupWithForm(selectors.addCardPopup, (data) => {
   return api.addCard(data)
     .then((res) => {
@@ -125,7 +105,6 @@ const addCardPopup = new PopupWithForm(selectors.addCardPopup, (data) => {
     })
     .catch(catchError);
 });
-
 
 const editAvatarPopup = new PopupWithForm(selectors.editAvatarPopup, (data) => {
   return api.updateAvatar(data)
@@ -137,10 +116,21 @@ const editAvatarPopup = new PopupWithForm(selectors.editAvatarPopup, (data) => {
 
 
 
-// Form validation
-const editFormValidator = new FormValidator(validationSettings, profileEditForm);
-const cardFormValidator = new FormValidator(validationSettings, addCardForm);
-const avatarFormValidator = new FormValidator(validationSettings, editAvatarForm);
+// Form validators
+const formValidators = {};
+
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+    const formName = formElement.getAttribute('name');
+
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  })
+}
+
+enableValidation(validationSettings);
 
 
 
@@ -153,32 +143,22 @@ deleteCardPopup.setEventListeners();
 
 
 
-// Initialize form validators
-editFormValidator.enableValidation();
-cardFormValidator.enableValidation();
-avatarFormValidator.enableValidation();
-
-
-
 // Add event listeners to buttons and profile image
 const profileEditButton = document.querySelector(".profile__edit-button");
 profileEditButton.addEventListener("mousedown", () => {
   editProfilePopup.setInputValues(userInfo.getUserInfo());
-  // const info = userInfo.getUserInfo();
-  // nameInput.value = info.name;
-  // aboutInput.value = info.about;
-  editFormValidator.disableButton();
+  formValidators[profileEditForm.getAttribute('name')].disableButton();
   editProfilePopup.open();
 });
 
 const addCardButton = document.querySelector(".profile__add-button");
 addCardButton.addEventListener("mousedown", () => {
-  cardFormValidator.disableButton();
+  formValidators[addCardForm.getAttribute('name')].disableButton();
   addCardPopup.open();
 });
 
 const editAvatarImage = document.querySelector(".profile__edit-image");
 editAvatarImage.addEventListener("mousedown", () => {
-  avatarFormValidator.disableButton();
+  formValidators[editAvatarForm.getAttribute('name')].disableButton();
   editAvatarPopup.open();
 })
