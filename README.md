@@ -21,3 +21,6 @@ This project simulates a simplified social media platform that allows users to s
 * Search Functionality: Add a search feature that allows users to search for specific posts or users based on keywords or tags. This can enhance the usability of the project and make it easier for users to find relevant content.
 
 * Data Persistence and Database Integration: Integrate a database system to store user profiles, posts, and other data persistently. This will enable users to access their content across multiple sessions and ensure data integrity.
+
+## How to View
+This project can be viewed at [this link](https://chandlarlanier.github.io/se_project_aroundtheus/).
