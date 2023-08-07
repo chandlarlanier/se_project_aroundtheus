@@ -29,7 +29,6 @@ export default class Card {
     return this._id;
   }
 
-
   removeCard() {
     this._cardElement.remove();
     this._cardElement = null;
@@ -58,12 +57,12 @@ export default class Card {
 
 
   _setEventListeners() {
-    this._likeButton.addEventListener("mousedown", () => this._handleLikeIcon());
-    this._binIcon.addEventListener("mousedown", () => {
+    this._likeButton.addEventListener("click", () => this._handleLikeIcon());
+    this._binIcon.addEventListener("click", () => {
       this._handleDelete(this);
     });
 
-    this._cardImage.addEventListener("mousedown", () => {
+    this._cardImage.addEventListener("click", () => {
       this._handleImageClick({ link: this._link, name: this._name });
     });
   }
