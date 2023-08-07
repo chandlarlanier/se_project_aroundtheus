@@ -80,8 +80,8 @@ const userInfo = new UserInfo({nameSelector: selectors.nameElement, aboutMeSelec
 // Create popups with forms
 const editProfilePopup = new PopupWithForm(selectors.editProfilePopup, (data) => {
   return api.updateProfileInfo(data)
-    .then(() => {
-      userInfo.setUserInfo(data);
+    .then((res) => {
+      userInfo.setUserInfo(res);
     })
     .catch(catchError);
 });
