@@ -1,15 +1,12 @@
 import Popup from "./Popup.js";
-import { api, catchError } from "../pages/index.js";
 
 export default class PopupWithConfirmation extends Popup {
-  constructor({ popupSelector }) {
+  constructor({ popupSelector, handleConfirm }) {
     super(popupSelector);
     this._confirmButton = this._popupElement.querySelector(".popup__button");
+    this._handleConfirm = handleConfirm;
   }
 
-  setSubmitAction(submitAction) {
-    this._submitAction = submitAction;
-  }
 
   open(card, cardId) {
     super.open();
@@ -17,18 +14,15 @@ export default class PopupWithConfirmation extends Popup {
     this._cardId = cardId;
   }
 
+  
   setEventListeners() {
     super.setEventListeners();
 
-    this.setSubmitAction(() => {
-      api.deleteCard(this._cardId)
+    this._confirmButton.addEventListener("click", () => {
+      this._handleConfirm(this._card, this._cardId)
         .then(() => {
-          this._card.removeCard();
           this.close();
         })
-        .catch(catchError)
     });
-
-    this._confirmButton.addEventListener("click", this._submitAction);
   }
 }

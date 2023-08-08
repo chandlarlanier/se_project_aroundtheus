@@ -4,17 +4,13 @@ export default class Card {
     this._link = data.link;
     this._id = data._id;
     this._isLiked = data.isLiked;
-
     this._handleImageClick = handleImageClick;
-
     this._handleDelete = handleDelete;
-
     this._confirmPopup = confirmPopup;
-
     this._api = api;
-
     this._cardSelector = cardSelector;
   }
+
 
   _getTemplate() {
     const cardElement = document
@@ -25,14 +21,17 @@ export default class Card {
     return cardElement;
   }
 
+
   getId() {
     return this._id;
   }
+
 
   removeCard() {
     this._cardElement.remove();
     this._cardElement = null;
   }
+
 
   _handleLikeIcon() {
     this._likeButton.classList.toggle("card__like-button_active");
@@ -48,6 +47,7 @@ export default class Card {
         })
     }
   }
+
 
   _setLike() {
     if (this._isLiked) {
@@ -67,6 +67,7 @@ export default class Card {
     });
   }
 
+  
   generateCard() {
     this._cardElement = this._getTemplate();
 

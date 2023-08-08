@@ -10,6 +10,7 @@ export default class PopupWithForm extends Popup {
     this._inputList = [...this._popupForm.querySelectorAll(".popup__input")];
   }
 
+
   renderLoading(isLoading, loadingText="Saving...") {
     if (isLoading) {
       this._submitButton.textContent = loadingText;
@@ -18,10 +19,12 @@ export default class PopupWithForm extends Popup {
     }
   }
 
+
   close() {
     super.close();
     this._popupForm.reset();
   }
+
 
   _getInputValues() {
     const inputValues = {};
@@ -31,6 +34,7 @@ export default class PopupWithForm extends Popup {
     return inputValues;
   }
 
+  
   setInputValues(data) {
     this._inputList.forEach((input) => {
       input.value = data[input.name];

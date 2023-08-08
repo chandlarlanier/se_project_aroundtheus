@@ -10,13 +10,6 @@ import { selectors, validationSettings, profileEditForm, addCardForm, editAvatar
 import PopupWithConfirmation from "../components/PopupWithConfirmation";
 
 
-// Catch error function
-export function catchError(err) {
-  console.error(err);
-}
-
-
-
 // Initialize api
 export const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -28,14 +21,33 @@ export const api = new Api({
 
 
 
-// create delete card popup
+// Define catch error function
+export function catchError(err) {
+  console.error(err);
+}
+
+
+
+// Define submit action function for confirm delete card popup
+const submitAction = (card, cardId) => {
+  return api.deleteCard(cardId)
+    .then(() => {
+      card.removeCard();
+    })
+    .catch(catchError)
+}
+
+
+
+// Create delete card popup object
 const deleteCardPopup = new PopupWithConfirmation({
-  popupSelector: selectors.deleteCardPopup
+  popupSelector: selectors.deleteCardPopup,
+  handleConfirm: submitAction
 });
 
 
 
-// Card renderer function
+// Define card renderer function
 const renderCard = (data) => {
   const cardElement = new Card(
     {
@@ -56,14 +68,19 @@ const renderCard = (data) => {
 
 
 
-// Create card and card image popup instances
+// Create card and card image popup objects
 export const cardPreviewPopup = new PopupWithImage(selectors.previewPopup);
 export const cardSection = new Section({ renderer: renderCard }, selectors.cardList);
 
 
 
+// Create user info object
+const userInfo = new UserInfo({nameSelector: selectors.nameElement, aboutMeSelector: selectors.descriptionElement, avatarSelector: selectors.avatarElement});
+
+
+
 // Get initial user data and cards
- Promise.all([api.getUserInfo(), api.getInitialCards()])
+Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
     userInfo.setUserInfo(userData);
     cardSection.renderItems(cards.reverse());
@@ -72,12 +89,7 @@ export const cardSection = new Section({ renderer: renderCard }, selectors.cardL
 
 
 
-// Create user info class
-const userInfo = new UserInfo({nameSelector: selectors.nameElement, aboutMeSelector: selectors.descriptionElement, avatarSelector: selectors.avatarElement});
-
-
-
-// Create popups with forms
+// Create popups with form objects
 const editProfilePopup = new PopupWithForm(selectors.editProfilePopup, (data) => {
   return api.updateProfileInfo(data)
     .then((res) => {
@@ -104,7 +116,7 @@ const editAvatarPopup = new PopupWithForm(selectors.editAvatarPopup, (data) => {
 
 
 
-// Form validators
+// Define form validators and enable validation
 const formValidators = {};
 
 const enableValidation = (config) => {
@@ -122,7 +134,7 @@ enableValidation(validationSettings);
 
 
 
-// Initialize popups
+// Set popup event listeners
 cardPreviewPopup.setEventListeners();
 editProfilePopup.setEventListeners();
 editAvatarPopup.setEventListeners();
